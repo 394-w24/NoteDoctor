@@ -13,7 +13,7 @@ function ListComponent({ items }) {
 
 export function PatientViewNurse() {
     const dummyData = {
-        name: "Lara Croft",
+        name: "Laura Croft",
         age: "21",
         gender: "Female",
         timeToDoctor: "10",

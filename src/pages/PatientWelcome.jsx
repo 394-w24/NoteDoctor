@@ -9,7 +9,7 @@ const PatientWelcome = () => {
   const age = differenceInYears(new Date(), dob);
   return (
     <div className="container mt-4">
-      <h1 className="font-serif text-4xl font-semibold">Hello, Carly Lowell</h1>
+      <h1 className="font-cursive text-7xl">Hello, Carly Lowell</h1>
       <DateHeader />
       <div className="flex justify-between">
         <div className="flex flex-col">

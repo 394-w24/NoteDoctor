@@ -1,27 +1,30 @@
 import { differenceInYears, format } from "date-fns";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { DateHeader } from "../components/DateHeader";
 
 const PatientWelcome = () => {
   const [open, setOpen] = useState(false);
   const [additionalIssue, setAdditionalIssue] = useState("");
-  const [additionalIssues, setAdditionalIssues] = useState([]); // TODO: add these additional issues to dB
+  const [additionalIssues, setAdditionalIssues] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setAdditionalIssues([...additionalIssues, additionalIssue]);
-  }
+    if (additionalIssue.trim() !== "") {
+      setAdditionalIssues([...additionalIssues, additionalIssue]);
+      setAdditionalIssue("");
+      setOpen(false);
+    }
+  };
 
   const handleChange = (e) => {
     setAdditionalIssue(e.target.value);
-  }
-
-  console.log(additionalIssues);
+  };
 
   const dob = new Date("1990-01-01");
   const dobString = format(dob, "MMMM dd, yyyy");
   const age = differenceInYears(new Date(), dob);
+
   return (
     <div className="container mt-4">
       <h1 className="font-cursive text-7xl">Hello, Carly Lowell</h1>
@@ -29,74 +32,75 @@ const PatientWelcome = () => {
       <div className="flex justify-between">
         <div className="flex flex-col">
           <div>
-            <p>
-              <span className="font-semibold">Date of Birth: </span>
-              {dobString}
-            </p>
-            <p>
-              <span className="font-semibold">Age: </span>
-              {age}
-            </p>
+            <p><span className="font-semibold">Date of Birth: </span>{dobString}</p>
+            <p><span className="font-semibold">Age: </span>{age}</p>
           </div>
           <div>
-            <p>
-              <span className="font-semibold">Gender Identity: </span>
-              Female, she/her
-            </p>
+            <p><span className="font-semibold">Gender Identity: </span>Female, she/her</p>
           </div>
           <div>
             <div className="font-semibold">Appointment Details</div>
             <ul className="ml-6 list-disc">
-              <li> Dr. Valina</li>
+              <li>Dr. Valina</li>
               <li>20 Minutes</li>
-              <li>
-                Annual Exam
+              <li>Annual Exam
                 <ul className="ml-4 list-disc">
                   <li>Breast Exam</li>
                   <li>Pelvic Exam</li>
                   <li>Pap Smear & STD Testing</li>
-                  {additionalIssues.map((issue, index) => (
-                    <li key={index}>{issue}</li>
-                  ))}
                 </ul>
               </li>
             </ul>
+            <div className="font-semibold mt-4">Add additional issues</div>
+            <ul className="ml-6 list-disc">
+              {additionalIssues.map((issue, index) => (
+                <li key={index}>{issue}</li>
+              ))}
+            </ul>
+            <button onClick={() => setOpen(!open)} className="mt-2">
+              Click to add more
+            </button>
           </div>
         </div>
 
-       <button onClick={() => setOpen(!open)} >
-          Add additional issues
-       </button>
+        {open && (
+          <dialog open={open} className="dialog" style={{ width: '300px', height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
+              <label htmlFor="additionalIssue" style={{ alignSelf: 'flex-start', margin: '10px 0' }}>Please enter additional issues below</label>
+              <input
+                id="additionalIssue"
+                type="text"
+                value={additionalIssue}
+                onChange={handleChange}
+                style={{ flexGrow: 1, margin: '10px 0', backgroundColor: '#ADD8E6' }}
+              />
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <button type="button" onClick={() => setOpen(!open)} style={{ alignSelf: 'flex-start' }}>
+                  Close
+                </button>
+                <button type="submit" style={{ alignSelf: 'flex-end' }}>
+                  Submit
+                </button>
+              </div>
+            </form>
+          </dialog>
+        )}
 
-       <dialog open={open} className="dialog">
-          <form onSubmit={handleSubmit}>
-            <button onClick={() => setOpen(!open)} >
-              Close
-            </button>
-            <input  type="text" 
-                    placeholder="Enter additional issues" 
-                    value={additionalIssue}
-                    onChange={handleChange} />
-            <button type="submit">Submit</button>
-          </form> 
-        </dialog>
-
-    
-        <div>
+        <div className="mt-4">
           <p className="font-bold">Your care team today</p>
           <div className="flex gap-2">
             <Link to="/staffBio" className="flex flex-col items-center gap-2">
               <img
                 src="/doctor.webp"
-                alt="doctor"
+                alt="Dr. Valina, MD"
                 className="aspect-square h-24 w-min rounded-full"
               />
               <p>Dr. Valina, MD</p>
             </Link>
             <Link to="/staffBio" className="flex flex-col items-center gap-2">
               <img
-                src="/doctor.webp"
-                alt="doctor"
+                src="/nurse.webp"
+                alt="Maria Alvarez, RN"
                 className="aspect-square h-24 w-min rounded-full"
               />
               <p>Maria Alvarez, RN</p>

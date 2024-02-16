@@ -1,9 +1,24 @@
 import { differenceInYears, format } from "date-fns";
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import { DateHeader } from "../components/DateHeader";
 
 const PatientWelcome = () => {
+  const [open, setOpen] = useState(false);
+  const [additionalIssue, setAdditionalIssue] = useState("");
+  const [additionalIssues, setAdditionalIssues] = useState([]); // TODO: add these additional issues to dB
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setAdditionalIssues([...additionalIssues, additionalIssue]);
+  }
+
+  const handleChange = (e) => {
+    setAdditionalIssue(e.target.value);
+  }
+
+  console.log(additionalIssues);
+
   const dob = new Date("1990-01-01");
   const dobString = format(dob, "MMMM dd, yyyy");
   const age = differenceInYears(new Date(), dob);
@@ -40,11 +55,33 @@ const PatientWelcome = () => {
                   <li>Breast Exam</li>
                   <li>Pelvic Exam</li>
                   <li>Pap Smear & STD Testing</li>
+                  {additionalIssues.map((issue, index) => (
+                    <li key={index}>{issue}</li>
+                  ))}
                 </ul>
               </li>
             </ul>
           </div>
         </div>
+
+       <button onClick={() => setOpen(!open)} >
+          Add additional issues
+       </button>
+
+       <dialog open={open} className="dialog">
+          <form onSubmit={handleSubmit}>
+            <button onClick={() => setOpen(!open)} >
+              Close
+            </button>
+            <input  type="text" 
+                    placeholder="Enter additional issues" 
+                    value={additionalIssue}
+                    onChange={handleChange} />
+            <button type="submit">Submit</button>
+          </form> 
+        </dialog>
+
+    
         <div>
           <p className="font-bold">Your care team today</p>
           <div className="flex gap-2">

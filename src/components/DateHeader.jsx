@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
+import { formatDate } from "../utils/dates";
 
 export const DateHeader = () => {
-  const today = new Date();
-  return (
-    <div className = "fixed top-0 right-0">
-        {/* TODO: format as per Figma, for now, we are using disorganized string, eg. February 29, 2024 */}
-        {today.toLocaleDateString()}
-    </div>
-  )
-}
+  const today = formatDate(new Date());
+  return <div className="fixed right-0 top-0">{today}</div>;
+};

@@ -26,19 +26,19 @@ const PatientWelcome = () => {
   const age = differenceInYears(new Date(), dob);
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-10" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
       <h1 className="font-cursive text-7xl">Hello, Carly Lowell</h1>
       <DateHeader />
       <div className="flex justify-between">
-        <div className="flex flex-col">
+        <div className="flex flex-col mt-10">
           <div>
             <p><span className="font-semibold">Date of Birth: </span>{dobString}</p>
             <p><span className="font-semibold">Age: </span>{age}</p>
           </div>
-          <div>
+          <div className="mt-20">
             <p><span className="font-semibold">Gender Identity: </span>Female, she/her</p>
           </div>
-          <div>
+          <div className="mt-20">
             <div className="font-semibold">Appointment Details</div>
             <ul className="ml-6 list-disc">
               <li>Dr. Valina</li>
@@ -51,49 +51,17 @@ const PatientWelcome = () => {
                 </ul>
               </li>
             </ul>
-            <div className="font-semibold mt-4">Add additional issues</div>
-            <ul className="ml-6 list-disc">
-              {additionalIssues.map((issue, index) => (
-                <li key={index}>{issue}</li>
-              ))}
-            </ul>
-            <button onClick={() => setOpen(!open)} className="mt-2">
-              Click to add more
-            </button>
           </div>
         </div>
-
-        {open && (
-          <dialog open={open} className="dialog" style={{ width: '300px', height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
-              <label htmlFor="additionalIssue" style={{ alignSelf: 'flex-start', margin: '10px 0' }}>Please enter additional issues below</label>
-              <input
-                id="additionalIssue"
-                type="text"
-                value={additionalIssue}
-                onChange={handleChange}
-                style={{ flexGrow: 1, margin: '10px 0', backgroundColor: '#ADD8E6' }}
-              />
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <button type="button" onClick={() => setOpen(!open)} style={{ alignSelf: 'flex-start' }}>
-                  Close
-                </button>
-                <button type="submit" style={{ alignSelf: 'flex-end' }}>
-                  Submit
-                </button>
-              </div>
-            </form>
-          </dialog>
-        )}
-
-        <div className="mt-4">
-          <p className="font-bold">Your care team today</p>
+  
+        <div className="mt-4" style={{ marginLeft: '800px' }}>
+        <p className="font-bold" style={{ fontSize: '18px' }}>Your care team today:</p>
           <div className="flex gap-2">
             <Link to="/staffBio" className="flex flex-col items-center gap-2">
               <img
                 src="/doctor.webp"
                 alt="Dr. Valina, MD"
-                className="aspect-square h-24 w-min rounded-full"
+                className="aspect-square h-32 w-min rounded-full"
               />
               <p>Dr. Valina, MD</p>
             </Link>
@@ -101,15 +69,55 @@ const PatientWelcome = () => {
               <img
                 src="/nurse.webp"
                 alt="Maria Alvarez, RN"
-                className="aspect-square h-24 w-min rounded-full"
+                className="aspect-square h-32 w-min rounded-full"
               />
               <p>Maria Alvarez, RN</p>
             </Link>
           </div>
         </div>
       </div>
+  
+      <div style={{ position: 'relative', top: '-165px', marginLeft: 'auto', marginRight: '500px' }}>
+
+
+        <div className="font-semibold">Add additional issues</div>
+        <ul className="ml-6 list-disc">
+          {additionalIssues.map((issue, index) => (
+            <li key={index}>{issue}</li>
+          ))}
+        </ul>
+        <button onClick={() => setOpen(!open)} className="mt-2">
+          Click to add more
+        </button>
+      </div>
+  
+      {open && (
+        <dialog open={open} className="dialog" style={{ width: '300px', height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
+            <label htmlFor="additionalIssue" style={{ alignSelf: 'flex-start', margin: '10px 0' }}>Please enter additional issues below</label>
+            <input
+              id="additionalIssue"
+              type="text"
+              value={additionalIssue}
+              onChange={handleChange}
+              style={{ flexGrow: 1, margin: '10px 0', backgroundColor: '#ADD8E6' }}
+            />
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <button type="button" onClick={() => setOpen(!open)} style={{ alignSelf: 'flex-start' }}>
+                Close
+              </button>
+              <button type="submit" style={{ alignSelf: 'flex-end' }}>
+                Submit
+              </button>
+            </div>
+          </form>
+        </dialog>
+      )}
     </div>
   );
+  
+
+  
 };
 
 export default PatientWelcome;

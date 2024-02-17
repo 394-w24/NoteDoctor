@@ -92,7 +92,7 @@ const PatientWelcome = () => {
       </div>
   
       {open && (
-        <dialog open={open} className="dialog" style={{ left: '50px', right: '500px', top: '40px',width: '300px', height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <dialog open={open} className="dialog" style={{ left: '150px', right: '1000px', top: '40px',width: '300px', height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
             <label htmlFor="additionalIssue" style={{ alignSelf: 'flex-start', margin: '10px 0' }}>Please enter additional issues below</label>
             <input

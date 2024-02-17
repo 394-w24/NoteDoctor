@@ -61,7 +61,7 @@ const PatientWelcome = () => {
               <img
                 src="/doctor.webp"
                 alt="Dr. Valina, MD"
-                className="aspect-square h-32 w-min rounded-full"
+                className="aspect-square h-32 w-32 rounded-full"
               />
               <p>Dr. Valina, MD</p>
             </Link>
@@ -77,7 +77,7 @@ const PatientWelcome = () => {
         </div>
       </div>
   
-      <div style={{ position: 'relative', top: '-165px', marginLeft: '300px', marginRight: 'auto' }}>
+      <div style={{ position: 'relative', top: '-165px', marginLeft: 'auto', marginRight: '500px' }}>
 
 
         <div className="font-semibold">Add additional issues</div>
@@ -92,7 +92,7 @@ const PatientWelcome = () => {
       </div>
   
       {open && (
-        <dialog open={open} className="dialog" style={{ left: '50px', right: '500px', top: '40px',width: '300px', height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <dialog open={open} className="dialog" style={{ width: '300px', height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
             <label htmlFor="additionalIssue" style={{ alignSelf: 'flex-start', margin: '10px 0' }}>Please enter additional issues below</label>
             <input

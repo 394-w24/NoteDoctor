@@ -26,10 +26,10 @@ const PatientWelcome = () => {
   const age = differenceInYears(new Date(), dob);
 
   return (
-    <div className="container mt-10" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+    <div className="container mt-10 m-10" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
       <h1 className="font-cursive text-7xl">Hello, Carly Lowell</h1>
       <DateHeader />
-      <div className="flex justify-between">
+      <div className="flex justify-between whitespace-nowrap">
         <div className="flex flex-col mt-10">
           <div>
             <p><span className="font-semibold">Date of Birth: </span>{dobString}</p>
@@ -56,7 +56,7 @@ const PatientWelcome = () => {
   
         <div className="mt-4" style={{ marginLeft: '800px' }}>
         <p className="font-bold" style={{ fontSize: '18px' }}>Your care team today:</p>
-          <div className="flex gap-2">
+          <div className="flex gap-2 whitespace-normal">
             <Link to="/staffBio" className="flex flex-col items-center gap-2">
               <img
                 src="/doctor.webp"
@@ -80,7 +80,7 @@ const PatientWelcome = () => {
       <div style={{ position: 'relative', top: '-165px', marginLeft: 'auto', marginRight: '500px' }}>
 
 
-        <div className="font-semibold">Add additional issues</div>
+        <div className="font-semibold">Additional Issues to Address</div>
         <ul className="ml-6 list-disc">
           {additionalIssues.map((issue, index) => (
             <li key={index}>{issue}</li>
@@ -94,7 +94,7 @@ const PatientWelcome = () => {
       {open && (
         <dialog open={open} className="dialog" style={{ width: '300px', height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
-            <label htmlFor="additionalIssue" style={{ alignSelf: 'flex-start', margin: '10px 0' }}>Please enter additional issues below</label>
+            <label htmlFor="additionalIssue" style={{ alignSelf: 'flex-start', margin: '10px 0' }}>Please enter additional issues below:</label>
             <input
               id="additionalIssue"
               type="text"

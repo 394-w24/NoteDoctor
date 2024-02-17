@@ -5,7 +5,7 @@ import { DateHeader } from "../components/DateHeader";
 export const StaffBio = () => {
   return (
     <div>
-      <h1 className="font-serif text-5xl font-bold">Dr.Jennifer Valina, MD</h1>
+      <h1 className="font-cursive mt-10 ml-10 text-7xl">Dr.Jennifer Valina, MD</h1>
 
       <DateHeader> </DateHeader>
 

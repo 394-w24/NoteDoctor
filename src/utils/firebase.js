@@ -35,15 +35,20 @@ export const getPatient = async (uuid) => {
 export const getAppt = async (uuid) => {
   const docRef = doc(db, "appointments", uuid);
   const docSnap = await getDoc(docRef);
+  let result = {};
 
   if (docSnap.exists()) {
     console.log("Document data:", docSnap.data());
-    return docSnap.data()
+    result = {...docSnap.data()}
   } else {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
   }
 
+  const patSnap = await getDoc(docSnap.data().patient);
+  // take patient data to result instead of pointer
+  result.patient = patSnap.data();
+  return result;
 }
 
 export const getCareGiver = async (uuid) => {
@@ -57,6 +62,7 @@ export const getCareGiver = async (uuid) => {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
   }
+  
 }
 
 export default getPatient

@@ -61,6 +61,12 @@ const PatientWelcome = () => {
               </li>
             </ul>
           </div>
+          <Link
+            to="checkin"
+            className="mt-4 rounded-lg border bg-slate-50/20 text-center font-semibold underline"
+          >
+            Do check in
+          </Link>
         </div>
         <div className="flex flex-col">
           <h1 className="text-shadow-lg text-center font-cursive text-8xl text-white shadow-black/80">
@@ -152,7 +158,7 @@ const PatientWelcome = () => {
               />
               <button
                 type="submit"
-                className="bg-contessa-500 rounded-lg border py-3 font-semibold text-white shadow"
+                className="rounded-lg border bg-contessa-500 py-3 font-semibold text-white shadow"
               >
                 Add Issues
               </button>

@@ -7,7 +7,12 @@ const CheckIn = () => {
     queryKey: ["apptData"],
     queryFn: () => getPatient("2ScZbzYKjN7leSH2V6ro"),
   });
+
+  getAppt("KMa3tIVTBbLKpv9etNau");
+
   if (isLoading) return "Loading...";
+
+  
 
   return (
     <main>
@@ -56,6 +61,38 @@ const CheckIn = () => {
 
 
       </form>
+
+      <div className="flex">
+        <div>
+          <h2>Appointment Details</h2>
+          <ul className="list-disc px-4">
+            <li>Doctor Name</li>
+            <li>Time</li>
+            <li>Annual Exam</li>
+            <ul className="list-disc px-4">
+              <li>Breast Exam</li>
+              <li>Pelvic Exam</li>
+              <li>Pap Smear & STD Testing</li>
+            </ul>
+          </ul>
+
+        </div>
+        <div>
+        <h2 >
+          Additional Issues to Address
+        </h2>
+        <ul className="list-disc px-4">
+          <li> Painful Periods </li>
+          <li>Click to add more... </li>
+        </ul>
+
+        <button> Assign Room </button>
+
+        </div>
+
+      </div>
+
+
     </main>
   );
 };

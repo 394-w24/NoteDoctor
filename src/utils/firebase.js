@@ -46,7 +46,9 @@ export const getAppt = async (uuid) => {
   }
 
   const patSnap = await getDoc(docSnap.data().patient);
-
+  // take patient data to result instead of pointer
+  result.patient = patSnap.data();
+  return result;
 }
 
 export const getCareGiver = async (uuid) => {
@@ -60,6 +62,7 @@ export const getCareGiver = async (uuid) => {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
   }
+  
 }
 
 export default getPatient

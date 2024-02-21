@@ -5,7 +5,7 @@ import RoomCode from "../components/RoomCode";
 import { getAppt } from "../utils/firebase";
 
 const CheckIn = () => {
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const { isLoading, data: apptData } = useQuery({
     queryKey: ["appointment", "KMa3tIVTBbLKpv9etNau"],
     queryFn: async () => getAppt("KMa3tIVTBbLKpv9etNau"),
@@ -14,7 +14,8 @@ const CheckIn = () => {
   if (!apptData) return "Loading...";
 
   return (
-    <main className=" min-h-svh bg-gradient-to-tr from-red-400 to-sky-600">
+    // /bg-gradient-to-tr from-red-400 to-sky-600
+    <main className=" min-h-svh ">
       <div className="mx-auto max-w-lg space-y-6 pt-8">
         <h1 className="font-cursive text-5xl">
           {apptData.patient.firstName} {apptData.patient.lastName} (
@@ -70,7 +71,7 @@ const CheckIn = () => {
                 <li>Click to add more... </li>
               </ul>
               <button
-                className="bg-contessa-500 border p-4 font-semibold text-white"
+                className="border bg-contessa-500 p-4 font-semibold text-white"
                 onClick={() => setOpenModal(true)}
               >
                 Assign Room
@@ -79,8 +80,8 @@ const CheckIn = () => {
           </div>
         </div>
         <Modal show={openModal} onClose={() => setOpenModal(false)}>
-          <Modal.Header>Scan QR code</Modal.Header>
-          <Modal.Body>
+          <Modal.Header className="bg-contessa-300">Check in</Modal.Header>
+          <Modal.Body className="bg-contessa-200">
             <RoomCode />
           </Modal.Body>
         </Modal>

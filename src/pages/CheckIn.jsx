@@ -1,18 +1,17 @@
+import { Modal } from "flowbite-react";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
-import { getAppt, getCareGiver, getPatient } from "../utils/firebase";
 import RoomCode from "../components/RoomCode";
-import { Modal } from 'flowbite-react';
+import { getAppt } from "../utils/firebase";
 
 const CheckIn = () => {
+  const [openModal, setOpenModal] = useState(true);
   const { isLoading, data: apptData } = useQuery({
-
-    queryKey: ["apptData"],
-    // getPatient("2ScZbzYKjN7leSH2V6ro")
-    queryFn: () => getAppt("KMa3tIVTBbLKpv9etNau"),
+    queryKey: ["appointment", "KMa3tIVTBbLKpv9etNau"],
+    queryFn: async () => getAppt("KMa3tIVTBbLKpv9etNau"),
   });
 
-  if (isLoading) return "Loading...";
+  if (!apptData) return "Loading...";
 
   return (
     <main className=" min-h-svh bg-gradient-to-tr from-red-400 to-sky-600">
@@ -48,15 +47,43 @@ const CheckIn = () => {
           />
           <FormInput label="Pulse" name="pulse" value={apptData.pulse} />
           <FormInput label="Blood Pressure" name="bp" value={apptData.bp} />
-         </form>
-
+        </form>
+        <div className="flex justify-between gap-6">
+          <div>
+            <h2>Appointment Details</h2>
+            <ul className="list-disc pl-5">
+              <li>Doctor Name</li>
+              <li>Time</li>
+              <li>Annual Exam</li>
+              <ul className="list-disc pl-5">
+                <li>Breast Exam</li>
+                <li>Pelvic Exam</li>
+                <li>Pap Smear & STD Testing</li>
+              </ul>
+            </ul>
+          </div>
+          <div className="flex grow flex-col justify-start">
+            <h2>Additional Issues to Address</h2>
+            <div className="flex h-full flex-col justify-between">
+              <ul className="list-disc pl-5">
+                <li> Painful Periods </li>
+                <li>Click to add more... </li>
+              </ul>
+              <button
+                className="bg-contessa-500 border p-4 font-semibold text-white"
+                onClick={() => setOpenModal(true)}
+              >
+                Assign Room
+              </button>
+            </div>
+          </div>
+        </div>
         <Modal show={openModal} onClose={() => setOpenModal(false)}>
           <Modal.Header>Scan QR code</Modal.Header>
           <Modal.Body>
             <RoomCode />
           </Modal.Body>
-			  </Modal>
-      
+        </Modal>
       </div>
     </main>
   );

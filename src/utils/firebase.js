@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCsVo2H8mKsXh6iiuZtoo7Hnz1Xigp0ScY",
@@ -8,12 +8,11 @@ const firebaseConfig = {
   storageBucket: "notedoctor-d96e7.appspot.com",
   messagingSenderId: "1053079986503",
   appId: "1:1053079986503:web:8bc20717f73a9288fdec62",
-  measurementId: "G-E2E401FCH5"
+  measurementId: "G-E2E401FCH5",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
@@ -24,13 +23,12 @@ export const getPatient = async (uuid) => {
 
   if (docSnap.exists()) {
     console.log("Document data:", docSnap.data());
-    return docSnap.data()
+    return docSnap.data();
   } else {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
   }
-
-}
+};
 
 export const getAppt = async (uuid) => {
   const docRef = doc(db, "appointments", uuid);
@@ -38,8 +36,7 @@ export const getAppt = async (uuid) => {
   let result = {};
 
   if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-    result = {...docSnap.data()}
+    result = { ...docSnap.data() };
   } else {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
@@ -48,8 +45,9 @@ export const getAppt = async (uuid) => {
   const patSnap = await getDoc(docSnap.data().patient);
   // take patient data to result instead of pointer
   result.patient = patSnap.data();
+  console.log("Document data:", result);
   return result;
-}
+};
 
 export const getCareGiver = async (uuid) => {
   const docRef = doc(db, "caregivers", uuid);
@@ -57,12 +55,9 @@ export const getCareGiver = async (uuid) => {
 
   if (docSnap.exists()) {
     console.log("Document data:", docSnap.data());
-    return docSnap.data()
+    return docSnap.data();
   } else {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
   }
-  
-}
-
-export default getPatient
+};

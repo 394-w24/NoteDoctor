@@ -43,8 +43,23 @@ export const getAppt = async (uuid) => {
   }
 
   const patSnap = await getDoc(docSnap.data().patient);
-  // take patient data to result instead of pointer
-  result.patient = patSnap.data();
+  if (patSnap.exists()) {
+    // take patient data to result instead of pointer
+    result.patient = patSnap.data();
+  } else {
+    console.log("No such document!");
+  }
+  const staff = [];
+  for (const caregiverRef of docSnap.data().caregivers) {
+    const caregiverSnap = await getDoc(caregiverRef);
+    if (caregiverSnap.exists()) {
+      staff.push(caregiverSnap.data());
+    } else {
+      console.log("No such document!");
+    }
+  }
+  result.caregivers = staff;
+
   console.log("Document data:", result);
   return result;
 };

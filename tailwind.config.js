@@ -1,14 +1,28 @@
+const plugin = require("tailwindcss/plugin");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    'node_modules/flowbite-react/lib/esm/**/*.js',
+    "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
 
   theme: {
     extend: {
+      keyframes: {
+        gradient: {
+          "0%": { "background-position": "9% 0%" },
+          "50%": { "background-position": "92% 100%" },
+          "100%": { "background-position": "9% 0%" },
+        },
+      },
+      animation: {
+        gradient: "gradient 15s ease infinite",
+      },
+      backgroundSize: {
+        huge: "600% 600%",
+      },
       fontFamily: {
         cursive: ["Just Another Hand", "cursive"],
       },
@@ -27,10 +41,25 @@ module.exports = {
           950: "#371b18",
         },
       },
+      textShadow: {
+        sm: "0 1px 2px var(--tw-shadow-color)",
+        DEFAULT: "0 2px 4px var(--tw-shadow-color)",
+        lg: "0 8px 16px var(--tw-shadow-color)",
+      },
     },
   },
 
   plugins: [
-    require('flowbite/plugin'),
+    require("flowbite/plugin"),
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          "text-shadow": (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme("textShadow") },
+      );
+    }),
   ],
-}
+};

@@ -18,17 +18,17 @@ const RoomCode = () => {
 
     const handleCamera = () => {
         // If the camera is on, stop the webcam stream
-    console.log(isCameraOn);
-    if (isCameraOn) {
-        const videoTracks = webcamRef.current?.stream.getVideoTracks();
-        videoTracks.forEach((track) => {
-          track.stop();
-        });
-      }
-      else {
-        setKey(Date.now()); // Force re-render to start the camera again
-      }
-      setCameraOn(!isCameraOn); // Toggle the camera state
+        if (isCameraOn) {
+            const videoTracks = webcamRef.current?.stream.getVideoTracks();
+            videoTracks.forEach((track) => {
+            track.stop();
+            });
+        }
+        else {
+            setKey(Date.now()); // Force re-render to start the camera again
+        }
+        setCameraOn(!isCameraOn); // Toggle the camera state
+    
     };
 
     // Function to capture an image from the webcam

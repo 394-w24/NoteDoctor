@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getAppt, getCareGiver, getPatient } from "../utils/firebase";
+import RoomCode from "../components/RoomCode";
+import { Modal } from 'flowbite-react';
 
 const CheckIn = () => {
+  const [openModal, setOpenModal] = useState(true);
   const { isLoading, data: patData } = useQuery({
     queryKey: ["apptData"],
     queryFn: () => getPatient("2ScZbzYKjN7leSH2V6ro"),
@@ -54,7 +57,13 @@ const CheckIn = () => {
           <input type="text" id="bp" name="name" readOnly value={patData.bp}/>
         </div>
 
-
+        <Modal show={openModal} onClose={() => setOpenModal(false)}>
+          <Modal.Header>Scan QR code</Modal.Header>
+          <Modal.Body>
+            <RoomCode />
+          </Modal.Body>
+			  </Modal>
+      
       </form>
     </main>
   );

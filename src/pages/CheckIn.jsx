@@ -1,14 +1,19 @@
 import React from "react";
-import {getPatient, getAppt, getCareGiver} from "../utils/firebase"
-import { useQuery } from 'react-query';
+import { useQuery } from "react-query";
+import { getAppt, getCareGiver, getPatient } from "../utils/firebase";
 
 const CheckIn = () => {
-  const patData = getPatient("2ScZbzYKjN7leSH2V6ro");
-  getAppt("KMa3tIVTBbLKpv9etNau");
-  getCareGiver("a8be0g5CGUvm3ARLAxDb")
+  const { isLoading, data: patData } = useQuery({
+    queryKey: ["apptData"],
+    queryFn: () => getPatient("2ScZbzYKjN7leSH2V6ro"),
+  });
+  if (isLoading) return "Loading...";
+
   return (
     <main>
-      <h1 className="font-cursive text-5xl">{patData.firstName} {patData.lastName} ({patData.pronouns})</h1>
+      <h1 className="font-cursive text-5xl">
+        {patData.firstName} {patData.lastName} ({patData.pronouns})
+      </h1>
     </main>
   );
 };

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getAppt, getCareGiver, getPatient } from "../utils/firebase";
+import RoomCode from "../components/RoomCode";
+import { Modal } from 'flowbite-react';
 
 const CheckIn = () => {
   const { isLoading, data: apptData } = useQuery({
+
     queryKey: ["apptData"],
     // getPatient("2ScZbzYKjN7leSH2V6ro")
     queryFn: () => getAppt("KMa3tIVTBbLKpv9etNau"),
@@ -45,34 +48,15 @@ const CheckIn = () => {
           />
           <FormInput label="Pulse" name="pulse" value={apptData.pulse} />
           <FormInput label="Blood Pressure" name="bp" value={apptData.bp} />
-        </form>
-        <div className="flex justify-between gap-6">
-          <div>
-            <h2>Appointment Details</h2>
-            <ul className="list-disc pl-5">
-              <li>Doctor Name</li>
-              <li>Time</li>
-              <li>Annual Exam</li>
-              <ul className="list-disc pl-5">
-                <li>Breast Exam</li>
-                <li>Pelvic Exam</li>
-                <li>Pap Smear & STD Testing</li>
-              </ul>
-            </ul>
-          </div>
-          <div className="flex grow flex-col justify-start">
-            <h2>Additional Issues to Address</h2>
-            <div className="flex h-full flex-col justify-between">
-              <ul className="list-disc pl-5">
-                <li> Painful Periods </li>
-                <li>Click to add more... </li>
-              </ul>
-              <button className="bg-contessa-500 border p-4 font-semibold text-white">
-                Assign Room
-              </button>
-            </div>
-          </div>
-        </div>
+         </form>
+
+        <Modal show={openModal} onClose={() => setOpenModal(false)}>
+          <Modal.Header>Scan QR code</Modal.Header>
+          <Modal.Body>
+            <RoomCode />
+          </Modal.Body>
+			  </Modal>
+      
       </div>
     </main>
   );

@@ -7,6 +7,12 @@ const RoomScreen = () => {
   const { roomId } = useParams();
   const room = useRealTimeDoc(["rooms", roomId]);
 
+  // TODO Add sync functionality by setting room appointment reference
+  // TODO Add QR Code
+  // TODO Connect Appointment Details
+  // TODO remove checkin links
+  // TODO Additional Issues to the db and not local state
+
   if (room.appointment)
     return <PatientWelcome appointment={room.appointment} />;
 

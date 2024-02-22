@@ -1,5 +1,15 @@
 import { initializeApp } from "firebase/app";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getFirestore,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCsVo2H8mKsXh6iiuZtoo7Hnz1Xigp0ScY",
@@ -60,4 +70,56 @@ export const getCareGiver = async (uuid) => {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
   }
+};
+
+export const useRealTimeDoc = (docPathArray) => {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    console.log("useRealTimeDoc", docPathArray);
+    const unsub = onSnapshot(doc(db, ...docPathArray), (doc) => {
+      setData({ ...doc.data(), id: doc.id });
+    });
+    return () => unsub();
+  }, []);
+  return data;
+};
+
+export const useRealTimeCollection = (
+  collectionPathArray,
+  whereArr,
+  sortArr,
+) => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const addOns = [];
+    if (whereArr) {
+      addOns.push(where(...whereArr));
+    }
+    if (sortArr) {
+      addOns.push(orderBy(...sortArr));
+    }
+    const q = query(collection(db, ...collectionPathArray), ...addOns);
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      setData(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+    return () => unsub();
+  }, []);
+  return data;
+};
+
+export const useRealtimeAppointments = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const q = query(collection(db, "appointments"), orderBy("date"));
+    const unsub = onSnapshot(q, async (querySnapshot) => {
+      const appts = [];
+      for (const doc of querySnapshot.docs) {
+        const patSnap = await getDoc(doc.data().patient);
+        appts.push({ ...doc.data(), id: doc.id, patient: patSnap.data() });
+      }
+      setData(appts);
+    });
+    return () => unsub();
+  }, []);
+  return data;
 };

@@ -1,9 +1,9 @@
 import { differenceInYears, format } from "date-fns";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { DateHeader } from "../components/DateHeader";
+import { DateHeader } from "./DateHeader";
 
-const PatientWelcome = () => {
+const PatientWelcome = ({ appointment }) => {
   const [open, setOpen] = useState(false);
   const [additionalIssue, setAdditionalIssue] = useState("");
   const [additionalIssues, setAdditionalIssues] = useState([]);

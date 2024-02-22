@@ -8,6 +8,7 @@ import {
   orderBy,
   query,
   where,
+  setDoc,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
@@ -40,6 +41,18 @@ export const getPatient = async (uuid) => {
   }
 };
 
+export const checkingIn = async (uuid, apptref) => {
+  const docRoom = doc(db, "rooms", uuid);
+  const docSnap = await getDoc(docRoom);
+  if (docSnap.exists()) {
+    setDoc(docRoom, { appointment: apptref}, {merge : true})
+    return true
+  } else {
+    console.log("Wrong Code!")
+    return false
+  }
+}
+
 export const getAppt = async (uuid) => {
   const docRef = doc(db, "appointments", uuid);
   const docSnap = await getDoc(docRef);
@@ -52,6 +65,7 @@ export const getAppt = async (uuid) => {
     console.log("No such document!");
   }
 
+  result.ref = docSnap.ref
   const patSnap = await getDoc(docSnap.data().patient);
   // take patient data to result instead of pointer
   result.patient = patSnap.data();

@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import PatientWelcome from "../components/PatientWelcome";
-import { useRealTimeDoc, useRealtimeRoom } from "../utils/firebase";
+import { useRealtimeRoom } from "../utils/firebase";
 
 const RoomScreen = () => {
   const { roomId } = useParams();

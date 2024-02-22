@@ -1,4 +1,3 @@
-import { set } from "date-fns";
 import { initializeApp } from "firebase/app";
 import {
   collection,
@@ -47,6 +46,7 @@ export const checkIn = async (uuid, apptref) => {
   const docSnap = await getDoc(docRoom);
   if (docSnap.exists()) {
     setDoc(docRoom, { appointment: apptref }, { merge: true });
+    setDoc(apptref, { status: "checkedIn" }, { merge: true });
     return true;
   } else {
     console.log("Wrong Code!");
@@ -56,6 +56,8 @@ export const checkIn = async (uuid, apptref) => {
 
 export const checkOut = async (uuid) => {
   const docRoom = doc(db, "rooms", uuid);
+  const docSnap = await getDoc(docRoom);
+  setDoc(docSnap.data().appointment, { status: "checkedOut" }, { merge: true });
   setDoc(docRoom, { appointment: null }, { merge: true });
 };
 
@@ -150,6 +152,10 @@ export const useRealtimeRoom = (roomId) => {
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "rooms", roomId), async (doc) => {
       const data = doc.data();
+      if (!data.appointment) {
+        setData({ ...doc.data(), id: doc.id });
+        return;
+      }
       const apptData = (await getDoc(data.appointment)).data();
       const patData = (await getDoc(apptData.patient)).data();
       const careData = [];

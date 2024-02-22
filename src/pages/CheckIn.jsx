@@ -1,16 +1,20 @@
 import { Modal } from "flowbite-react";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
 import RoomCode from "../components/RoomCode";
 import { getAppt } from "../utils/firebase";
 
 const CheckIn = () => {
   const [openModal, setOpenModal] = useState(false);
+  const { id } = useParams();
   const { data: apptData } = useQuery({
-    queryKey: ["appointment", "KMa3tIVTBbLKpv9etNau"],
-    queryFn: () => getAppt("KMa3tIVTBbLKpv9etNau"),
+    queryKey: ["appointment", id],
+    queryFn: () => getAppt(id),
   });
 
+  // TODO Make Input dynamic
+  // TODO Use Patient Image
   if (!apptData) return "Loading...";
 
   return (
@@ -64,12 +68,12 @@ const CheckIn = () => {
             </ul>
           </div>
           <div className="flex grow flex-col justify-start">
-            <h2>Additional Issues to Address</h2>
+            {/* <h2>Additional Issues to Address</h2> */}
             <div className="flex h-full flex-col justify-between">
-              <ul className="list-disc pl-5">
+              {/* <ul className="list-disc pl-5">
                 <li> Painful Periods </li>
                 <li>Click to add more... </li>
-              </ul>
+              </ul> */}
               <button
                 className="border bg-contessa-500 p-4 font-semibold text-white"
                 onClick={() => setOpenModal(true)}

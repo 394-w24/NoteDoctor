@@ -1,9 +1,10 @@
 import { differenceInYears, format } from "date-fns";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { checkOut } from "../utils/firebase";
 import { DateHeader } from "./DateHeader";
 
-const PatientWelcome = ({ appointment }) => {
+const PatientWelcome = ({ room }) => {
   const [open, setOpen] = useState(false);
   const [additionalIssue, setAdditionalIssue] = useState("");
   const [additionalIssues, setAdditionalIssues] = useState([]);
@@ -20,8 +21,12 @@ const PatientWelcome = ({ appointment }) => {
   const handleChange = (e) => {
     setAdditionalIssue(e.target.value);
   };
-
-  const dob = new Date("1990-01-01");
+  const appointment = room.appointment;
+  const patient = appointment.patient;
+  const dob = patient.dob.toDate();
+  const doctor = appointment.caregivers.find(
+    (caregiver) => caregiver.role === "doctor",
+  );
   const dobString = format(dob, "MMMM dd, yyyy");
   const age = differenceInYears(new Date(), dob);
 
@@ -51,20 +56,20 @@ const PatientWelcome = ({ appointment }) => {
           <div className="mt-20">
             <p>
               <span className="font-semibold">Gender Identity: </span>Female,
-              she/her
+              {patient.pronouns}
             </p>
           </div>
           <div className="mt-20">
             <div className="font-semibold">Appointment Details</div>
             <ul className="ml-6 list-disc">
-              <li>Dr. Valina</li>
-              <li>20 Minutes</li>
+              <li>{`Dr. ${doctor.lastName}`}</li>
+              <li>{appointment.duration} Minutes</li>
               <li>
-                Annual Exam
+                {appointment.type}
                 <ul className="ml-4 list-disc">
-                  <li>Breast Exam</li>
-                  <li>Pelvic Exam</li>
-                  <li>Pap Smear & STD Testing</li>
+                  {appointment.details.map((detail, index) => (
+                    <li key={index}>{detail}</li>
+                  ))}
                 </ul>
               </li>
             </ul>
@@ -114,7 +119,12 @@ const PatientWelcome = ({ appointment }) => {
           Click to add more
         </button>
       </div>
-      <Link to="checkin">checkin Link</Link>
+      <button
+        className="border border-black/50 bg-contessa-500 px-4 py-2 shadow-lg"
+        onClick={() => checkOut(room.name)}
+      >
+        End Appointment
+      </button>
 
       {open && (
         <dialog

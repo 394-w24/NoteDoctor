@@ -6,9 +6,9 @@ import { getAppt } from "../utils/firebase";
 
 const CheckIn = () => {
   const [openModal, setOpenModal] = useState(false);
-  const { isLoading, data: apptData } = useQuery({
+  const { data: apptData } = useQuery({
     queryKey: ["appointment", "KMa3tIVTBbLKpv9etNau"],
-    queryFn: async () => getAppt("KMa3tIVTBbLKpv9etNau"),
+    queryFn: () => getAppt("KMa3tIVTBbLKpv9etNau"),
   });
 
   if (!apptData) return "Loading...";
@@ -82,7 +82,7 @@ const CheckIn = () => {
         <Modal show={openModal} onClose={() => setOpenModal(false)}>
           <Modal.Header className="bg-contessa-300">Check in</Modal.Header>
           <Modal.Body className="bg-contessa-200">
-            <RoomCode />
+            <RoomCode appt={apptData} />
           </Modal.Body>
         </Modal>
       </div>

@@ -6,10 +6,9 @@ import { useRealTimeDoc } from "../utils/firebase";
 const RoomScreen = () => {
   const { roomId } = useParams();
   const room = useRealTimeDoc(["rooms", roomId]);
-  if (!room) {
-    return <div>Loading...</div>;
-  }
-  if (room.appointment) <PatientWelcome appointment={room.appointment} />;
+
+  if (room.appointment)
+    return <PatientWelcome appointment={room.appointment} />;
 
   return (
     <div className="my-4 flex flex-col items-center gap-10">

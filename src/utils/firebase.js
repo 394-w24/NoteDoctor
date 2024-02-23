@@ -81,6 +81,22 @@ export const getAppt = async (uuid) => {
   return result;
 };
 
+export const updateAppt = async (apptInfo) => {
+  const docRef = doc(db, "appointments", apptInfo.uuid);
+  // const docSnap = await getDoc(docRef);
+  docRef.update({
+    height: apptInfo.height,
+    weight: apptInfo.weight,
+    respRate: apptInfo.respRate,
+    pulse: apptInfo.pulse,
+    bp: apptInfo.bp
+  }).then(() => {
+    console.log('Document successfully updated!');
+  }).catch((error) => {
+    console.error('Error updating document:', error);
+  })
+}
+
 export const getCareGiver = async (uuid) => {
   const docRef = doc(db, "caregivers", uuid);
   const docSnap = await getDoc(docRef);

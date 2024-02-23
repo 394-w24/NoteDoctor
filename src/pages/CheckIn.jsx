@@ -3,11 +3,18 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import RoomCode from "../components/RoomCode";
-import { getAppt } from "../utils/firebase";
+import { getAppt, updateAppt } from "../utils/firebase";
 
 const CheckIn = () => {
   const [openModal, setOpenModal] = useState(false);
   const { id } = useParams();
+  const [inputs, setInputs] = useState({
+    height: "",
+    weight: "",
+    respRate: "",
+    pulse: "",
+    bp: "",
+  });
   const { data: apptData } = useQuery({
     queryKey: ["appointment", id],
     queryFn: () => getAppt(id),
@@ -37,21 +44,53 @@ const CheckIn = () => {
             </p>
           </div>
           <img
-            src="/nurse.webp"
-            alt="Maria Alvarez, RN"
+            src={apptData.patient.image}
+            alt={apptData.patient.firstName + " " + apptData.patient.lastName}
             className="aspect-square h-32 w-min rounded-full"
           />
         </div>
         <form className="w-full space-y-2">
-          <FormInput label="Height" name="height" value={apptData.height} />
-          <FormInput label="Weight" name="weight" value={apptData.weight} />
+          <FormInput 
+            label="Height" 
+            name="height" 
+            value={apptData.height}
+            changeHandler={(val) =>
+              setInputs((prev) => ({ ...prev, height: val }))
+            }
+          />
+          <FormInput 
+            label="Weight" 
+            name="weight" 
+            value={apptData.weight} 
+            changeHandler={(val) =>
+              setInputs((prev) => ({ ...prev, weight: val }))
+            }
+          />
           <FormInput
             label="Respiration Rate"
             name="respRate"
             value={apptData.respRate}
+            changeHandler={(val) =>
+              setInputs((prev) => ({ ...prev, respRate: val }))
+            }
           />
-          <FormInput label="Pulse" name="pulse" value={apptData.pulse} />
-          <FormInput label="Blood Pressure" name="bp" value={apptData.bp} />
+          <FormInput 
+            label="Pulse" 
+            name="pulse" 
+            value={apptData.pulse}
+            changeHandler={(val) =>
+              setInputs((prev) => ({ ...prev, pulse: val }))
+            }
+          />
+          <FormInput 
+            label="Blood Pressure" 
+            name="bp" 
+            value={apptData.bp}
+            changeHandler={(val) => 
+              setInputs((prev) => ({ ...prev, bp: val }))
+            }
+          />
+          <button className="w-1/2">Submit</button>
         </form>
         <div className="flex justify-between gap-6">
           <div>
@@ -94,7 +133,7 @@ const CheckIn = () => {
   );
 };
 
-function FormInput({ label, name, value }) {
+function FormInput({ label, name, value, changeHandler }) {
   return (
     <div className="flex justify-around">
       <label className="w-1/2 font-semibold" htmlFor="height">
@@ -105,8 +144,9 @@ function FormInput({ label, name, value }) {
         className="border border-black px-3 py-1"
         id={name}
         name={name}
-        readOnly
+        // readOnly
         value={value}
+        onChange={(e) => changeHandler(e.target.value)}
       />
     </div>
   );

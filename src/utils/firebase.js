@@ -84,18 +84,18 @@ export const getAppt = async (uuid) => {
 export const updateAppt = async (apptInfo) => {
   const docRef = doc(db, "appointments", apptInfo.uuid);
   // const docSnap = await getDoc(docRef);
-  docRef.update({
-    height: apptInfo.height,
-    weight: apptInfo.weight,
-    respRate: apptInfo.respRate,
-    pulse: apptInfo.pulse,
-    bp: apptInfo.bp
-  }).then(() => {
-    console.log('Document successfully updated!');
-  }).catch((error) => {
-    console.error('Error updating document:', error);
-  })
-}
+  await setDoc(
+    docRef,
+    {
+      height: apptInfo.height,
+      weight: apptInfo.weight,
+      respRate: apptInfo.respRate,
+      pulse: apptInfo.pulse,
+      bp: apptInfo.bp,
+    },
+    { merge: true },
+  );
+};
 
 export const getCareGiver = async (uuid) => {
   const docRef = doc(db, "caregivers", uuid);
@@ -176,8 +176,9 @@ export const useRealtimeRoom = (roomId) => {
       const patData = (await getDoc(apptData.patient)).data();
       const careData = [];
       for (const careRef of apptData.caregivers) {
-        const tempCareData = (await getDoc(careRef)).data();
-        careData.push(tempCareData);
+        const tempCareSnap = await getDoc(careRef);
+        const tempCareData = tempCareSnap.data();
+        careData.push({ ...tempCareData, id: tempCareSnap.id });
       }
       const res = {
         ...data,

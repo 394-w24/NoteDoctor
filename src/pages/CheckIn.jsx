@@ -1,3 +1,4 @@
+import { differenceInYears } from "date-fns";
 import { Modal } from "flowbite-react";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
@@ -18,11 +19,29 @@ const CheckIn = () => {
   const { data: apptData } = useQuery({
     queryKey: ["appointment", id],
     queryFn: () => getAppt(id),
+    onSuccess: (data) => {
+      setInputs({
+        height: data.height,
+        weight: data.weight,
+        respRate: data.respRate,
+        pulse: data.pulse,
+        bp: data.bp,
+      });
+    },
   });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateAppt({ ...inputs, uuid: id });
+  };
 
   // TODO Make Input dynamic
   // TODO Use Patient Image
   if (!apptData) return "Loading...";
+  apptData.patient.age = differenceInYears(
+    new Date(),
+    apptData.patient.dob.toDate(),
+  );
 
   return (
     // /bg-gradient-to-tr from-red-400 to-sky-600
@@ -49,19 +68,22 @@ const CheckIn = () => {
             className="aspect-square h-32 w-min rounded-full"
           />
         </div>
-        <form className="w-full space-y-2">
-          <FormInput 
-            label="Height" 
-            name="height" 
-            value={apptData.height}
+        <form
+          className="flex w-full flex-col justify-center space-y-2"
+          onSubmit={handleSubmit}
+        >
+          <FormInput
+            label="Height"
+            name="height"
+            value={inputs.height}
             changeHandler={(val) =>
               setInputs((prev) => ({ ...prev, height: val }))
             }
           />
-          <FormInput 
-            label="Weight" 
-            name="weight" 
-            value={apptData.weight} 
+          <FormInput
+            label="Weight"
+            name="weight"
+            value={inputs.weight}
             changeHandler={(val) =>
               setInputs((prev) => ({ ...prev, weight: val }))
             }
@@ -69,28 +91,28 @@ const CheckIn = () => {
           <FormInput
             label="Respiration Rate"
             name="respRate"
-            value={apptData.respRate}
+            value={inputs.respRate}
             changeHandler={(val) =>
               setInputs((prev) => ({ ...prev, respRate: val }))
             }
           />
-          <FormInput 
-            label="Pulse" 
-            name="pulse" 
-            value={apptData.pulse}
+          <FormInput
+            label="Pulse"
+            name="pulse"
+            value={inputs.pulse}
             changeHandler={(val) =>
               setInputs((prev) => ({ ...prev, pulse: val }))
             }
           />
-          <FormInput 
-            label="Blood Pressure" 
-            name="bp" 
-            value={apptData.bp}
-            changeHandler={(val) => 
-              setInputs((prev) => ({ ...prev, bp: val }))
-            }
+          <FormInput
+            label="Blood Pressure"
+            name="bp"
+            value={inputs.bp}
+            changeHandler={(val) => setInputs((prev) => ({ ...prev, bp: val }))}
           />
-          <button className="w-1/2">Submit</button>
+          <button className="mx-auto w-7/12 border border-red-500 bg-contessa-500 text-white ">
+            Submit
+          </button>
         </form>
         <div className="flex justify-between gap-6">
           <div>

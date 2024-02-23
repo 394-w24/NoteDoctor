@@ -2,34 +2,32 @@ import React from "react";
 import BackButton from "../components/BackButton";
 import { DateHeader } from "../components/DateHeader";
 
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
+import { getCareGiver } from "../utils/firebase";
+
 export const StaffBio = () => {
+  const { id } = useParams();
+  const { data: staff } = useQuery({
+    queryKey: ["staff", id],
+    queryFn: () => getCareGiver(id),
+  });
+  if (!staff) return "Loading...";
   return (
     <div>
-      <h1 className="font-cursive mt-10 ml-10 text-7xl">Dr.Jennifer Valina, MD</h1>
+      <h1 className="ml-10 mt-10 font-cursive text-7xl">
+        {staff.title} {staff.firstName} {staff.lastName} {staff.suffix}
+      </h1>
 
-      <DateHeader> </DateHeader>
+      <DateHeader />
 
       <div className="mt-4 flex gap-12">
         <img
           className="h-96 rounded-full"
-          src="/doctor.webp"
-          alt="Dr. Jennifer Valina"
+          src={staff.image}
+          alt={staff.firstName + " " + staff.lastName}
         />
-        <p>
-          Dr. Valina graduated from The Ohio State University, completed her
-          medical school training at Harvard Medical School, and her residency
-          at Johns Hopkins Medical School. Board Certified in Obstetrics and
-          Gynecology, Dr. Valina has been practicing for 28 years, the last
-          seven at Women’s Health Clinic. She focuses on general Ob-Gyn care
-          from adolescence to menopausal care and beyond. Her passion for
-          women’s health care started well before medical school, and she finds
-          the ability and training to be involved in primary care as well as
-          surgical care of a patient very fulfilling. Plus, she says,
-          “Delivering babies is just the sweetest!” Dr. Valina lives in
-          Arlington Heights with her husband and three dogs. When not seeing
-          patients, she enjoys spending time with her family, cooking, and
-          traveling.
-        </p>
+        <p className="mx-3 whitespace-pre-wrap">{staff.bio}</p>
       </div>
 
       <BackButton></BackButton>

@@ -23,8 +23,8 @@ const RoomCode = ({ appt }) => {
         </div>
 
         <img
-          src="/nurse.webp"
-          alt="Maria Alvarez, RN"
+          src={appt.patient.image}
+          alt={appt.patient.firstName + " " + appt.patient.lastName}
           className="aspect-square h-32 w-min rounded-full"
         />
       </div>

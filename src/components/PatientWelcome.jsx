@@ -1,4 +1,5 @@
 import { differenceInYears, format } from "date-fns";
+import { Modal } from "flowbite-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { checkOut } from "../utils/firebase";
@@ -31,154 +32,106 @@ const PatientWelcome = ({ room }) => {
   const age = differenceInYears(new Date(), dob);
 
   return (
-    <div
-      className="container m-10 mt-10"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-      }}
-    >
-      <h1 className="font-cursive text-7xl">Hello, Carly Lowell</h1>
+    <div className="flex min-h-svh justify-between gap-48 py-12 pl-24 pr-48">
       <DateHeader />
-      <div className="flex justify-between whitespace-nowrap">
+      <div className="flex flex-col gap-10">
+        <div className="flex items-center justify-center gap-8">
+          <h1 className="font-cursive text-7xl">
+            Hello, {patient.firstName} {patient.lastName}
+          </h1>
+          <img
+            src={patient.image}
+            alt={patient.firstName + " " + patient.lastName}
+            className="aspect-square h-32 w-min rounded-full"
+          />
+        </div>
         <div className="mt-10 flex flex-col">
-          <div>
-            <p>
-              <span className="font-semibold">Date of Birth: </span>
-              {dobString}
-            </p>
-            <p>
-              <span className="font-semibold">Age: </span>
-              {age}
-            </p>
-          </div>
-          <div className="mt-20">
-            <p>
-              <span className="font-semibold">Gender Identity: </span>Female,
-              {patient.pronouns}
-            </p>
-          </div>
-          <div className="mt-20">
-            <div className="font-semibold">Appointment Details</div>
-            <ul className="ml-6 list-disc">
-              <li>{`Dr. ${doctor.lastName}`}</li>
-              <li>{appointment.duration} Minutes</li>
-              <li>
-                {appointment.type}
-                <ul className="ml-4 list-disc">
-                  {appointment.details.map((detail, index) => (
-                    <li key={index}>{detail}</li>
-                  ))}
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="mt-4" style={{ marginLeft: "800px" }}>
-          <p className="font-bold" style={{ fontSize: "18px" }}>
-            Your care team today:
+          <p>
+            <span className="font-semibold">Date of Birth: </span>
+            {dobString}
           </p>
-          <div className="flex gap-2 whitespace-normal">
-            <Link to="/staffBio" className="flex flex-col items-center gap-2">
-              <img
-                src="/doctor.webp"
-                alt="Dr. Valina, MD"
-                className="aspect-square h-32 w-32 rounded-full"
-              />
-              <p>Dr. Valina, MD</p>
-            </Link>
-            <Link to="/staffBio" className="flex flex-col items-center gap-2">
-              <img
-                src="/nurse.webp"
-                alt="Maria Alvarez, RN"
-                className="aspect-square h-32 w-min rounded-full"
-              />
-              <p>Maria Alvarez, RN</p>
-            </Link>
-          </div>
-        </div>
-      </div>
+          <p>
+            <span className="font-semibold">Age: </span>
+            {age}
+          </p>
+          <p>
+            <span className="font-semibold">Gender Identity: </span>
+            {`${patient.gender}, ${patient.pronouns}`}
+          </p>
 
-      <div
-        style={{
-          position: "relative",
-          top: "-165px",
-          marginLeft: "auto",
-          marginRight: "500px",
-        }}
-      >
-        <div className="font-semibold">Additional Issues to Address</div>
-        <ul className="ml-6 list-disc">
-          {additionalIssues.map((issue, index) => (
-            <li key={index}>{issue}</li>
-          ))}
-        </ul>
-        <button onClick={() => setOpen(!open)} className="mt-2">
-          Click to add more
+          <p className="font-semibold">Appointment Details</p>
+          <ul className="ml-6 list-disc">
+            <li>{`Dr. ${doctor.lastName}`}</li>
+            <li>{appointment.duration} Minutes</li>
+            <li>
+              {appointment.type}
+              <ul className="ml-4 list-disc">
+                {appointment.details.map((detail, index) => (
+                  <li key={index}>{detail}</li>
+                ))}
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <button
+          className="border border-black/50 bg-contessa-500 px-4 py-2 font-semibold text-white shadow-lg"
+          onClick={() => checkOut(room.name)}
+        >
+          End Appointment
         </button>
       </div>
-      <button
-        className="border border-black/50 bg-contessa-500 px-4 py-2 shadow-lg"
-        onClick={() => checkOut(room.name)}
-      >
-        End Appointment
-      </button>
-
-      {open && (
-        <dialog
-          open={open}
-          className="dialog"
-          style={{
-            width: "300px",
-            height: "300px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              height: "100%",
-              justifyContent: "space-between",
-            }}
-          >
-            <label
-              htmlFor="additionalIssue"
-              style={{ alignSelf: "flex-start", margin: "10px 0" }}
-            >
-              Please enter additional issues below:
-            </label>
-            <input
-              id="additionalIssue"
-              type="text"
-              value={additionalIssue}
-              onChange={handleChange}
-              style={{
-                flexGrow: 1,
-                margin: "10px 0",
-                backgroundColor: "#ADD8E6",
-              }}
-            />
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <button
-                type="button"
-                onClick={() => setOpen(!open)}
-                style={{ alignSelf: "flex-start" }}
+      <div className="flex grow flex-col items-end">
+        <div className="">
+          <p className="text-center text-lg font-bold">Your care team today:</p>
+          <div className="flex gap-2">
+            {appointment.caregivers.map((caregiver, index) => (
+              <Link
+                key={index}
+                to={`/staffBio/${caregiver.id}`}
+                className="flex flex-col items-center gap-2"
               >
-                Close
-              </button>
-              <button type="submit" style={{ alignSelf: "flex-end" }}>
-                Submit
-              </button>
-            </div>
+                <img
+                  src={caregiver.image}
+                  alt={`${caregiver.firstName} ${caregiver.lastName}`}
+                  className="aspect-square h-32 w-32 rounded-full"
+                />
+                <p>
+                  {caregiver.firstName} {caregiver.lastName}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div className="mt-8 w-1/2 grow">
+          <div className="font-semibold">Additional Issues to Address</div>
+          <ul className="ml-6 list-disc">
+            {additionalIssues.map((issue, index) => (
+              <li key={index}>{issue}</li>
+            ))}
+          </ul>
+          <button onClick={() => setOpen(!open)} className="mt-2">
+            Click to add more
+          </button>
+        </div>
+      </div>
+
+      <Modal show={open} onClose={() => setOpen(false)}>
+        <Modal.Header>Add Additional Issue</Modal.Header>
+        <Modal.Body>
+          <form onSubmit={handleSubmit} className="flex flex-col">
+            <p className="text-sm font-semibold text-gray-800">
+              Separate multiple issues with either a comma or a new line
+            </p>
+            <textarea value={additionalIssue} onChange={handleChange} />
+            <button
+              type="submit"
+              className="mx-auto mt-2 w-1/2 border bg-sky-600/80 p-2 font-semibold text-white"
+            >
+              Add
+            </button>
           </form>
-        </dialog>
-      )}
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

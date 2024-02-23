@@ -35,8 +35,6 @@ const CheckIn = () => {
     updateAppt({ ...inputs, uuid: id });
   };
 
-  // TODO Make Input dynamic
-  // TODO Use Patient Image
   if (!apptData) return "Loading...";
   apptData.patient.age = differenceInYears(
     new Date(),
@@ -147,7 +145,7 @@ const CheckIn = () => {
         <Modal show={openModal} onClose={() => setOpenModal(false)}>
           <Modal.Header className="bg-contessa-300">Check in</Modal.Header>
           <Modal.Body className="bg-contessa-200">
-            <RoomCode appt={apptData} />
+            <RoomCode appt={apptData} close={() => setOpenModal(false)} />
           </Modal.Body>
         </Modal>
       </div>

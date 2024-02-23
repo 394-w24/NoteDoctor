@@ -8,7 +8,6 @@ const RoomScreen = () => {
   const room = useRealtimeRoom(roomId);
 
   // TODO Add QR Code
-  // TODO Additional Issues to the db and not local state
 
   if (!room) return <h1>Loading...</h1>;
   if (room.appointment) return <PatientWelcome room={room} />;

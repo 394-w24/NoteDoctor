@@ -2,12 +2,16 @@ import { useState } from "react";
 // import { useMutation } from "react-query";
 import { checkIn } from "../utils/firebase";
 
-const RoomCode = ({ appt }) => {
+const RoomCode = ({ appt, close }) => {
   const [code, setCode] = useState("");
   const patData = appt.patient;
   const handleCodeChange = (e) => {
     console.log(e.target.value);
     setCode(e.target.value);
+  };
+  const handleCheckin = () => {
+    checkIn(code, appt.ref);
+    close();
   };
   return (
     <div>
@@ -19,7 +23,7 @@ const RoomCode = ({ appt }) => {
         <div className="flex flex-col">
           <p>Room Assignment Code</p>
           <input type="text" value={code} onChange={handleCodeChange} />
-          <button onClick={() => checkIn(code, appt.ref)}>Assign Room</button>
+          <button onClick={handleCheckin}>Assign Room</button>
         </div>
 
         <img

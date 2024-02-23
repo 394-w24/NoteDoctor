@@ -1,26 +1,40 @@
 import { differenceInYears, format } from "date-fns";
 import { Modal } from "flowbite-react";
+import { X } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { checkOut } from "../utils/firebase";
+import { addIssues, checkOut, removeIssue } from "../utils/firebase";
 import { DateHeader } from "./DateHeader";
 
 const PatientWelcome = ({ room }) => {
   const [open, setOpen] = useState(false);
-  const [additionalIssue, setAdditionalIssue] = useState("");
-  const [additionalIssues, setAdditionalIssues] = useState([]);
+  const [issuesControl, setIssuesControl] = useState("");
+  const [additionalIssues, setAdditionalIssues] = useState(
+    room.appointment.issues,
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (additionalIssue.trim() !== "") {
-      setAdditionalIssues([...additionalIssues, additionalIssue]);
-      setAdditionalIssue("");
+    const resultArray = issuesControl
+      .trim()
+      .split(/,|\n/)
+      .filter((item) => item !== "");
+    if (resultArray.length > 0) {
+      addIssues(room.appointment, resultArray);
+      setAdditionalIssues([...additionalIssues, ...resultArray]);
+      setIssuesControl("");
       setOpen(false);
     }
   };
-
+  const handleRemoveIssue = (issue, index) => {
+    removeIssue(room.appointment, issue);
+    setAdditionalIssues([
+      ...additionalIssues.slice(0, index),
+      ...additionalIssues.slice(index + 1),
+    ]);
+  };
   const handleChange = (e) => {
-    setAdditionalIssue(e.target.value);
+    setIssuesControl(e.target.value);
   };
   const appointment = room.appointment;
   const patient = appointment.patient;
@@ -104,9 +118,14 @@ const PatientWelcome = ({ room }) => {
         </div>
         <div className="mt-8 w-1/2 grow">
           <div className="font-semibold">Additional Issues to Address</div>
-          <ul className="ml-6 list-disc">
+          <ul className="ml-6 list-disc space-y-1">
             {additionalIssues.map((issue, index) => (
-              <li key={index}>{issue}</li>
+              <div key={index} className="flex items-center gap-2">
+                <li>{issue}</li>
+                <button onClick={() => handleRemoveIssue(issue, index)}>
+                  <X size={16} strokeWidth={3} />
+                </button>
+              </div>
             ))}
           </ul>
           <button onClick={() => setOpen(!open)} className="mt-2">
@@ -122,7 +141,7 @@ const PatientWelcome = ({ room }) => {
             <p className="text-sm font-semibold text-gray-800">
               Separate multiple issues with either a comma or a new line
             </p>
-            <textarea value={additionalIssue} onChange={handleChange} />
+            <textarea rows={10} value={issuesControl} onChange={handleChange} />
             <button
               type="submit"
               className="mx-auto mt-2 w-1/2 border bg-sky-600/80 p-2 font-semibold text-white"

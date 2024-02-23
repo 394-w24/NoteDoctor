@@ -1,5 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { initializeApp } from "firebase/app";
 import {
+  arrayRemove,
+  arrayUnion,
   collection,
   doc,
   getDoc,
@@ -8,6 +11,7 @@ import {
   orderBy,
   query,
   setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -96,6 +100,20 @@ export const updateAppt = async (apptInfo) => {
     { merge: true },
   );
 };
+export const addIssues = async (apptInfo, newIssues) => {
+  const docRef = doc(db, "appointments", apptInfo.uuid);
+  // const docSnap = await getDoc(docRef);
+  await updateDoc(docRef, {
+    issues: arrayUnion(...newIssues),
+  });
+};
+export const removeIssue = async (apptInfo, issue) => {
+  const docRef = doc(db, "appointments", apptInfo.uuid);
+  // const docSnap = await getDoc(docRef);
+  await updateDoc(docRef, {
+    issues: arrayRemove(issue),
+  });
+};
 
 export const getCareGiver = async (uuid) => {
   const docRef = doc(db, "caregivers", uuid);
@@ -183,7 +201,12 @@ export const useRealtimeRoom = (roomId) => {
       const res = {
         ...data,
         id: doc.id,
-        appointment: { ...apptData, patient: patData, caregivers: careData },
+        appointment: {
+          ...apptData,
+          patient: patData,
+          caregivers: careData,
+          uuid: data.appointment.id,
+        },
       };
       console.log("useRealtimeRoom", res);
       setData(res);

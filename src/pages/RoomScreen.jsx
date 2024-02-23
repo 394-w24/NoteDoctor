@@ -16,7 +16,7 @@ const RoomScreen = () => {
       <h1 className="text-7xl font-bold">Room {room.name}</h1>
       {/* Insert QR Code Here */}
       <p>Code: {room.id}</p>
-      <p>Use code to sync this room with an appointments</p>
+      <p>Use code to sync this room with an appointment</p>
     </div>
   );
 };

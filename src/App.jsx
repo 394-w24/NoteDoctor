@@ -5,6 +5,7 @@ import ApptSelect from "./pages/ApptSelect";
 import CheckIn from "./pages/CheckIn";
 import RoomScreen from "./pages/RoomScreen";
 import RoomSelect from "./pages/RoomSelect";
+import Backdoor from "./pages/Backdoor";
 import { StaffBio } from "./pages/StaffBio";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Route path="staffbio/:id" element={<StaffBio />} />
       <Route path="checkin" element={<ApptSelect />} />
       <Route path="checkin/:id" element={<CheckIn />} />
+      <Route path="backdoor" element={<Backdoor />} />
       <Route path="roomcode" element={<RoomCode />} />
     </Routes>
   );

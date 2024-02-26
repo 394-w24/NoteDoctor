@@ -1,8 +1,18 @@
-import { render, screen } from '@testing-library/react';
+import { BrowserRouter as Router} from "react-router-dom";
+import {describe, expect, test} from 'vitest';
+import {fireEvent, render, screen} from '@testing-library/react';
 import App from './App';
+// import RoomCode from "/pages/RoomScreen";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('counter tests', () => {
+    
+  test("Room screen should be displayed", () => {
+    render(
+      <Router>
+      <App />
+      </Router>
+      );
+    expect(screen.getByText('What room is this?')).toBeDefined();
+  });
+
 });

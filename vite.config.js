@@ -5,8 +5,12 @@ export default defineConfig(() => {
   return {
     build: {
       outDir: 'build',
-      
+
     },
     plugins: [react()],
+    test: {
+        globals: true,
+        environment: 'jsdom',
+      }
   };
 });

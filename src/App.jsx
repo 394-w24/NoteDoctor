@@ -11,7 +11,7 @@ import { StaffBio } from "./pages/StaffBio";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="rooms" />} />
+      <Route path="/" element={<Navigate to="checkin" />} />
       <Route path="rooms" element={<RoomSelect />} />
       <Route path="rooms/:roomId" element={<RoomScreen />} />
       <Route path="staffbio/:id" element={<StaffBio />} />

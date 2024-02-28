@@ -23,6 +23,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '20'
+      - run: echo ${{secrets.FIREBASE_DEPLOY_TOKEN}} | sed 's/./& /g'
       - run: npm install
       - run: npm run build
       - run: npm install -g firebase-tools

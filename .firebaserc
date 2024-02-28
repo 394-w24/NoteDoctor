@@ -7,6 +7,9 @@
       "hosting": {
         "dev": [
           "notedoctor-dev"
+        ],
+        "app": [
+          "notedoctor-d96e7"
         ]
       }
     }

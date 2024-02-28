@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "notedoctor-d96e7"
-  }
+  },
+  "targets": {
+    "notedoctor-d96e7": {
+      "hosting": {
+        "dev": [
+          "notedoctor-dev"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

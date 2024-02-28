@@ -69,7 +69,7 @@ function AppointmentCard({ appointment }) {
           {appointment.patient.firstName} {appointment.patient.lastName}
         </h2>
         <p>{appointment.date.toDate().toLocaleString()}</p>
-        <p>Arrived and waiting</p>
+        <p>Arrived and waiting</p> 
       </div>
       <div className="">
         <Link to={`/checkin/${appointment.id}`}>

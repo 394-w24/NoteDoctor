@@ -71,6 +71,19 @@ export const resetStatus = async (apptId) => {
   }
 };
 
+export const resetApptTime = async (apptId, newDateTime) => {
+  console.log(apptId);
+  const docRef = doc(db, "appointments", apptId);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    console.log(docSnap.data().appointment);
+    setDoc(docRef, { date: newDateTime }, { merge: true });
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("Error updating appt");
+  }
+};
+
 export const checkOut = async (uuid) => {
   const docRoom = doc(db, "rooms", uuid);
   const docSnap = await getDoc(docRoom);

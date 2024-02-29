@@ -128,7 +128,10 @@ const PatientWelcome = ({ room }) => {
               </div>
             ))}
           </ul>
-          <button onClick={() => setOpen(!open)} className="mt-2">
+          <button
+            className="mt-2 rounded-md border bg-sky-600/80 p-2 font-semibold text-white shadow-lg"
+            onClick={() => setOpen(!open)}
+          >
             Click to add more
           </button>
         </div>

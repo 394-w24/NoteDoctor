@@ -128,6 +128,11 @@ export const removeIssue = async (apptInfo, issue) => {
   });
 };
 
+export const confirmRoom = async (roomId) => {
+  const docRef = doc(db, "rooms", roomId);
+  await setDoc(docRef, { confirmed: true }, { merge: true });
+};
+
 export const getCareGiver = async (uuid) => {
   const docRef = doc(db, "caregivers", uuid);
   const docSnap = await getDoc(docRef);

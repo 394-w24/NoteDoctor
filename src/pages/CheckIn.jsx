@@ -1,6 +1,6 @@
 import { differenceInYears } from "date-fns";
 import { Modal } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import RoomCode from "../components/RoomCode";
@@ -16,6 +16,13 @@ const CheckIn = () => {
     pulse: "",
     bp: "",
   });
+  const [isAllValid, setIsAllValid] = useState({
+    height: false,
+    weight: false,
+    respRate: false,
+    pulse: false,
+    bp: false,
+  });
   const { data: apptData } = useQuery({
     queryKey: ["appointment", id],
     queryFn: () => getAppt(id),
@@ -29,10 +36,13 @@ const CheckIn = () => {
       });
     },
   });
+  const allValid = Object.values(isAllValid).every((val) => val);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateAppt({ ...inputs, uuid: id });
+    if (!allValid) {
+      updateAppt({ ...inputs, uuid: id });
+    }
   };
 
   if (!apptData) return "Loading...";
@@ -74,6 +84,10 @@ const CheckIn = () => {
             label="Height"
             name="height"
             value={inputs.height}
+            regex={/^[0-9]+'(?:1[0-1]|[0-9])"$/}
+            errmsg={"Please use the right height format. eg. 5'10\""}
+            isAllValid={isAllValid}
+            setIsAllValid={setIsAllValid}
             changeHandler={(val) =>
               setInputs((prev) => ({ ...prev, height: val }))
             }
@@ -82,6 +96,10 @@ const CheckIn = () => {
             label="Weight"
             name="weight"
             value={inputs.weight}
+            regex={/^[1-9]\d*(\.\d+)?$/}
+            errmsg={"Please make sure input the right weight. eg. a positive number"}
+            isAllValid={isAllValid}
+            setIsAllValid={setIsAllValid}
             changeHandler={(val) =>
               setInputs((prev) => ({ ...prev, weight: val }))
             }
@@ -90,6 +108,10 @@ const CheckIn = () => {
             label="Respiration Rate"
             name="respRate"
             value={inputs.respRate}
+            regex={/^[1-9][0-9]*$/}
+            errmsg={"Please make sure input the right respiration rate. eg. a positive integer"}
+            isAllValid={isAllValid}
+            setIsAllValid={setIsAllValid}
             changeHandler={(val) =>
               setInputs((prev) => ({ ...prev, respRate: val }))
             }
@@ -98,6 +120,10 @@ const CheckIn = () => {
             label="Pulse"
             name="pulse"
             value={inputs.pulse}
+            regex={/^[1-9][0-9]*$/}
+            errmsg={"Please make sure input the right pulse. eg. a positive integer"}
+            isAllValid={isAllValid}
+            setIsAllValid={setIsAllValid}
             changeHandler={(val) =>
               setInputs((prev) => ({ ...prev, pulse: val }))
             }
@@ -106,9 +132,21 @@ const CheckIn = () => {
             label="Blood Pressure"
             name="bp"
             value={inputs.bp}
+            regex={/^\d{2,3}\/\d{2,3}$/}
+            errmsg={"Please use the right blood pressure format. eg. 120/60"}
+            isAllValid={isAllValid}
+            setIsAllValid={setIsAllValid}
             changeHandler={(val) => setInputs((prev) => ({ ...prev, bp: val }))}
           />
-          <button className="mx-auto w-7/12 border border-red-500 bg-contessa-500 text-white ">
+          <button
+            className="mx-auto w-7/12 border border-red-500"
+            style={{
+              color: !allValid ? 'gray' : 'white',
+              backgroundColor: !allValid ? 'lightgray' : '#C0726A',
+              cursor: !allValid ? 'not-allowed' : 'pointer',
+            }}
+            disabled={!allValid}
+          >
             Submit
           </button>
         </form>
@@ -134,7 +172,7 @@ const CheckIn = () => {
                 <li>Click to add more... </li>
               </ul> */}
               <button
-                className="border bg-contessa-500 p-4 font-semibold text-white"
+                className="bg-contessa-500 border p-4 font-semibold text-white"
                 onClick={() => setOpenModal(true)}
               >
                 Assign Room
@@ -153,21 +191,48 @@ const CheckIn = () => {
   );
 };
 
-function FormInput({ label, name, value, changeHandler }) {
+function FormInput({
+  label,
+  name,
+  value,
+  regex,
+  errmsg,
+  isAllValid,
+  setIsAllValid,
+  changeHandler,
+}) {
+  // const [isValid, setIsValid] = useState(true);
+  const validate = (e) => {
+    var val = e.target.value;
+    if (val !== "") {
+      if (regex.test(val)) {
+        setIsAllValid({ ...isAllValid, [name]: true });
+      } else {
+        setIsAllValid({ ...isAllValid, [name]: false });
+      }
+    }
+    changeHandler(val);
+  };
   return (
-    <div className="flex justify-around">
-      <label className="w-1/2 font-semibold" htmlFor="height">
-        {label}
-      </label>
-      <input
-        type="text"
-        className="border border-black px-3 py-1"
-        id={name}
-        name={name}
-        // readOnly
-        value={value}
-        onChange={(e) => changeHandler(e.target.value)}
-      />
+    <div>
+      <div className="flex justify-around">
+        <label className="w-1/2 font-semibold" htmlFor="height">
+          {label}
+        </label>
+        <input
+          type="text"
+          className="border border-black px-3 py-1"
+          id={name}
+          name={name}
+          placeholder={errmsg}
+          // readOnly
+          value={value}
+          onChange={validate}
+        />
+      </div>
+      <div className="flex justify-center text-red-500 text-center">
+        {!isAllValid[name] && errmsg}
+      </div>
     </div>
   );
 }

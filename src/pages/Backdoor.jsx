@@ -22,15 +22,43 @@ const Backdoor = () => {
         </div>
     );
 };
-function AppointmentCard({ appointment }) {
+
+const ChangeTime = (appointment) => {
+    console.log(appointment);
     const [apptOffset, setApptOffset] = useState(15);
 
-    // Define a function to receive the value from the NumericInput component
     const handleChange = (event) => {
         const newValue = parseInt(event.target.value, 10);
         setApptOffset(newValue);
     };
-    if (appointment.status === "checkedIn" || isDateInPast(appointment.date.toDate()))
+    return (
+        <>
+            <div className="d-flex align-items-center pt-4 pr-5 pl-5">
+                <button className="rounded-md border border-black/50 bg-white/50 p-2 shadow hover:bg-black/25" onClick={() => resetApptTime(appointment.id, getCurrentTimePlusNMinutes(apptOffset))}>
+                    Reset DateTime
+                </button>
+            </div>
+            <div classname="align-items-center">
+                <p className="mb-0">Appointment offset from now in mins:</p>
+                <input
+                    type="number"
+                    value={apptOffset}
+                    onChange={handleChange}
+                    className="form-control rounded-md border border-black/50"
+                />
+            </div>
+        </>
+    );
+}
+function AppointmentCard({ appointment }) {
+    const [apptOffset, setApptOffset] = useState(15);
+
+    const handleChange = (event) => {
+        const newValue = parseInt(event.target.value, 10);
+        setApptOffset(newValue);
+    };
+    
+    if (appointment.status === "checkedIn" && isDateInPast(appointment.date.toDate()))
         return (
             <div className="flex rounded-lg border-2 border-blue-700 bg-blue-100 p-4 shadow-lg">
                 <div>
@@ -44,17 +72,16 @@ function AppointmentCard({ appointment }) {
                     <button className="rounded-md border border-black/50 bg-white/50 p-2 shadow hover:bg-black/25" onClick={() => resetApptTime(appointment.id, getCurrentTimePlusNMinutes(apptOffset))}>
                         Reset DateTime
                     </button>
-                    </div>
-                    <div classname="align-items-center">
-                        <p className="mb-0">Appointment offset from now in mins:</p>
-                        <input
-                            type="number"
-                            value={apptOffset}
-                            onChange={handleChange}
-                            className="form-control rounded-md border border-black/50"
-                        />
-                    </div>
-
+                </div>
+                <div classname="align-items-center">
+                    <p className="mb-0">Appointment offset from now in mins:</p>
+                    <input
+                        type="number"
+                        value={apptOffset}
+                        onChange={handleChange}
+                        className="form-control rounded-md border border-black/50"
+                    />
+                </div>
             </div>
         );
     if (appointment.status === "checkedOut")
@@ -81,6 +108,32 @@ function AppointmentCard({ appointment }) {
             <></>
         );
     // Arrived and waiting case
+    if (isDateInPast(appointment.date.toDate()))
+        return (
+            <div className="flex rounded-lg border-2 border-yellow-700 bg-yellow-100 p-4 px-8 shadow-lg">
+                <div>
+                    <h2>
+                        {appointment.patient.firstName} {appointment.patient.lastName}
+                    </h2>
+                    <p>{appointment.date.toDate().toLocaleString()}</p>
+                    <p>Arrived and waiting</p>
+                </div>
+                <div className="d-flex align-items-center pt-4 pr-5 pl-5">
+                    <button className="rounded-md border border-black/50 bg-white/50 p-2 shadow hover:bg-black/25" onClick={() => resetApptTime(appointment.id, getCurrentTimePlusNMinutes(apptOffset))}>
+                        Reset DateTime
+                    </button>
+                </div>
+                <div classname="align-items-center">
+                    <p className="mb-0">Appointment offset from now in mins:</p>
+                    <input
+                        type="number"
+                        value={apptOffset}
+                        onChange={handleChange}
+                        className="form-control rounded-md border border-black/50"
+                    />
+                </div>
+            </div>
+        );
     return (
         <></>
     );

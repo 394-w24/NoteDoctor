@@ -1,9 +1,14 @@
-import { differenceInYears, format } from "date-fns";
+import { differenceInYears, format, formatDistanceToNow } from "date-fns";
 import { Modal } from "flowbite-react";
 import { X } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { addIssues, checkOut, removeIssue } from "../utils/firebase";
+import {
+  addIssues,
+  checkOut,
+  removeIssue,
+  useRealtimeWaitTime,
+} from "../utils/firebase";
 import { DateHeader } from "./DateHeader";
 
 const PatientWelcome = ({ room }) => {
@@ -12,7 +17,8 @@ const PatientWelcome = ({ room }) => {
   const [additionalIssues, setAdditionalIssues] = useState(
     room.appointment.issues,
   );
-
+  const waitTime = useRealtimeWaitTime(room.appointment.date);
+  const waitTimeString = formatDistanceToNow(waitTime, { addSuffix: true });
   const handleSubmit = (e) => {
     e.preventDefault();
     const resultArray = issuesControl
@@ -67,6 +73,10 @@ const PatientWelcome = ({ room }) => {
           <p>
             <span className="font-semibold">Age: </span>
             {age}
+          </p>
+          <p>
+            <span className="font-semibold">Expected Wait Time: </span>
+            {waitTimeString}
           </p>
           <p>
             <span className="font-semibold">Gender Identity: </span>

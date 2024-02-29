@@ -138,32 +138,13 @@ const CheckIn = () => {
             setIsAllValid={setIsAllValid}
             changeHandler={(val) => setInputs((prev) => ({ ...prev, bp: val }))}
           />
-          <button
+          {/* <button
             className="mx-auto w-7/12 border border-red-500"
-            style={{
-              color: !allValid ? 'gray' : 'white',
-              backgroundColor: !allValid ? 'lightgray' : '#C0726A',
-              cursor: !allValid ? 'not-allowed' : 'pointer',
-            }}
-            disabled={!allValid}
           >
             Submit
-          </button>
+          </button> */}
         </form>
         <div className="flex justify-between gap-6">
-          <div>
-            <h2>Appointment Details</h2>
-            <ul className="list-disc pl-5">
-              <li>Doctor Name</li>
-              <li>Time</li>
-              <li>Annual Exam</li>
-              <ul className="list-disc pl-5">
-                <li>Breast Exam</li>
-                <li>Pelvic Exam</li>
-                <li>Pap Smear & STD Testing</li>
-              </ul>
-            </ul>
-          </div>
           <div className="flex grow flex-col justify-start">
             {/* <h2>Additional Issues to Address</h2> */}
             <div className="flex h-full flex-col justify-between">
@@ -173,6 +154,12 @@ const CheckIn = () => {
               </ul> */}
               <button
                 className="bg-contessa-500 border p-4 font-semibold text-white"
+                style={{
+                  color: !allValid ? 'gray' : 'white',
+                  backgroundColor: !allValid ? 'lightgray' : '#C0726A',
+                  cursor: !allValid ? 'not-allowed' : 'pointer',
+                }}
+                disabled={!allValid}
                 onClick={() => setOpenModal(true)}
               >
                 Assign Room

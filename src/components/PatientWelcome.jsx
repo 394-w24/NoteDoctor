@@ -1,4 +1,9 @@
-import { differenceInYears, format, formatDistanceToNow } from "date-fns";
+import {
+  differenceInMinutes,
+  differenceInYears,
+  format,
+  formatDistanceToNow,
+} from "date-fns";
 import { Modal } from "flowbite-react";
 import { X } from "lucide-react";
 import React, { useState } from "react";
@@ -17,8 +22,16 @@ const PatientWelcome = ({ room }) => {
   const [additionalIssues, setAdditionalIssues] = useState(
     room.appointment.issues,
   );
+  const formatDistanceToNowInRoundedMinutes = (date) => {
+    const minutesDifference = differenceInMinutes(new Date(), date);
+    const roundedMinutes = Math.abs(Math.round(minutesDifference / 5)) * 5; // Round to the nearest fifth
+    return `About ${roundedMinutes} minutes`;
+  };
   const waitTime = useRealtimeWaitTime(room.appointment.date);
-  const waitTimeString = formatDistanceToNow(waitTime, { addSuffix: true });
+  const waitTimeString =
+    waitTime > 0
+      ? formatDistanceToNowInRoundedMinutes(waitTime)
+      : "The doctor will see you shortly";
   const handleSubmit = (e) => {
     e.preventDefault();
     const resultArray = issuesControl

@@ -10,7 +10,7 @@ const RoomScreen = () => {
   console.log(room);
 
   if (!room) return <h1>Loading...</h1>;
-  if (!room.confirmed) return <PatientPrivate room={room} />;
+  if (!room.confirmed && room.appointment) return <PatientPrivate room={room} />;
   if (room.appointment) return <PatientWelcome room={room} />;
   return (
     <div className="my-4 flex flex-col items-center gap-10">

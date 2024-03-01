@@ -90,7 +90,7 @@ export const checkOut = async (uuid) => {
   const docRoom = doc(db, "rooms", uuid);
   const docSnap = await getDoc(docRoom);
   setDoc(docSnap.data().appointment, { status: "checkedOut" }, { merge: true });
-  setDoc(docRoom, { appointment: null }, { merge: true });
+  setDoc(docRoom, { appointment: null, confirmed: false}, { merge: true });
 };
 
 export const getAppt = async (uuid) => {

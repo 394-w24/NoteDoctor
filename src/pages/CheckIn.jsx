@@ -1,6 +1,6 @@
 import { differenceInYears } from "date-fns";
 import { Modal } from "flowbite-react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import RoomCode from "../components/RoomCode";
@@ -9,6 +9,7 @@ import { getAppt, updateAppt } from "../utils/firebase";
 const CheckIn = () => {
   const [openModal, setOpenModal] = useState(false);
   const { id } = useParams();
+  const formRef = useRef(null);
   const [inputs, setInputs] = useState({
     height: "",
     weight: "",
@@ -45,6 +46,13 @@ const CheckIn = () => {
     }
   };
 
+  const handleClick = () => {
+    if (formRef.current) {
+      formRef.current.submit();
+    }
+    setOpenModal(true);
+  };
+
   if (!apptData) return "Loading...";
   apptData.patient.age = differenceInYears(
     new Date(),
@@ -77,6 +85,7 @@ const CheckIn = () => {
           />
         </div>
         <form
+          ref={formRef}
           className="flex w-full flex-col justify-center space-y-2"
           onSubmit={handleSubmit}
         >
@@ -160,7 +169,7 @@ const CheckIn = () => {
                   cursor: !allValid ? 'not-allowed' : 'pointer',
                 }}
                 disabled={!allValid}
-                onClick={() => setOpenModal(true)}
+                onClick={handleClick} // need to also submit the new data
               >
                 Assign Room
               </button>

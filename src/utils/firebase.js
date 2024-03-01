@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { addMinutes } from "date-fns";
 import { initializeApp } from "firebase/app";
 import {
   arrayRemove,
@@ -7,6 +8,7 @@ import {
   doc,
   getDoc,
   getFirestore,
+  limit,
   onSnapshot,
   orderBy,
   query,
@@ -141,6 +143,11 @@ export const removeIssue = async (apptInfo, issue) => {
   });
 };
 
+export const confirmRoom = async (roomId) => {
+  const docRef = doc(db, "rooms", roomId);
+  await setDoc(docRef, { confirmed: true }, { merge: true });
+};
+
 export const getCareGiver = async (uuid) => {
   const docRef = doc(db, "caregivers", uuid);
   const docSnap = await getDoc(docRef);
@@ -201,6 +208,29 @@ export const useRealtimeAppointments = () => {
         appts.push({ ...doc.data(), id: doc.id, patient: patSnap.data() });
       }
       setData(appts);
+    });
+    return () => unsub();
+  }, []);
+  return data;
+};
+
+export const useRealtimeWaitTime = (date) => {
+  const [data, setData] = useState(0);
+  useEffect(() => {
+    const q = query(
+      collection(db, "appointments"),
+      orderBy("date", "desc"),
+      where("status", "==", "checkedIn"),
+      where("date", "<", date),
+      limit(1),
+    );
+    const unsub = onSnapshot(q, async (querySnapshot) => {
+      const valid = querySnapshot.docs[0].exists;
+      if (valid) {
+        const lastAppt = querySnapshot.docs[0].data();
+        const waitTime = addMinutes(lastAppt.date.toDate(), lastAppt.duration);
+        setData(waitTime);
+      }
     });
     return () => unsub();
   }, []);

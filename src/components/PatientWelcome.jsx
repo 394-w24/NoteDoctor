@@ -78,6 +78,7 @@ const PatientWelcome = ({ room }) => {
             className="aspect-square h-32 w-min rounded-full"
           />
         </div>
+        <h2 className="text-2xl"><span className="font-semibold">Expected Wait Time: </span> {waitTimeString}</h2>
         <div className="mt-10 flex flex-col">
           <p>
             <span className="font-semibold">Date of Birth: </span>
@@ -86,10 +87,6 @@ const PatientWelcome = ({ room }) => {
           <p>
             <span className="font-semibold">Age: </span>
             {age}
-          </p>
-          <p>
-            <span className="font-semibold">Expected Wait Time: </span>
-            {waitTimeString}
           </p>
           <p>
             <span className="font-semibold">Gender Identity: </span>

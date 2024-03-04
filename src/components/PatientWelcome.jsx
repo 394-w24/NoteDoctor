@@ -5,7 +5,7 @@ import {
   formatDistanceToNow,
   subMinutes,
 } from "date-fns";
-import { Modal } from "flowbite-react";
+import { Modal, Button } from "flowbite-react";
 import { X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -69,6 +69,15 @@ const PatientWelcome = ({ room }) => {
       setOpen(false);
     }
   };
+
+  const addButtonIssue = (issue) => {
+    if (issuesControl === "") {
+      setIssuesControl(issue);
+    } else {
+      setIssuesControl(issue + "\n" + issuesControl);
+    }
+  };
+
   const handleRemoveIssue = (issue, index) => {
     removeIssue(room.appointment, issue);
     setAdditionalIssues([
@@ -135,7 +144,7 @@ const PatientWelcome = ({ room }) => {
           </ul>
         </div>
         <button
-          className="border border-black/50 bg-contessa-500 px-4 py-2 font-semibold text-white shadow-lg"
+          className="bg-contessa-500 border border-black/50 px-4 py-2 font-semibold text-white shadow-lg"
           onClick={() => checkOut(room.name)}
         >
           End Appointment
@@ -189,6 +198,31 @@ const PatientWelcome = ({ room }) => {
         <Modal.Body>
           <form onSubmit={handleSubmit} className="flex flex-col">
             <p className="text-sm font-semibold text-gray-800">
+              Tap to add any additional issue(s) you would like to address with
+              the doctor.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <ButtonInput name="IUD" addButtonIssue={addButtonIssue} />
+              <ButtonInput
+                name="Contraception"
+                addButtonIssue={addButtonIssue}
+              />
+              <ButtonInput name="Breasts" addButtonIssue={addButtonIssue} />
+              <ButtonInput
+                name="Experiencing birth control side effects"
+                addButtonIssue={addButtonIssue}
+              />
+              <ButtonInput name="Period" addButtonIssue={addButtonIssue} />
+              <ButtonInput
+                name={"Hormonal birth control option"}
+                addButtonIssue={addButtonIssue}
+              />
+              <ButtonInput
+                name="Non-hormonal birth control options"
+                addButtonIssue={addButtonIssue}
+              />
+            </div>
+            <p className="text-sm font-semibold text-gray-800">
               Separate multiple issues with either a comma or a new line
             </p>
             <textarea rows={10} value={issuesControl} onChange={handleChange} />
@@ -204,5 +238,19 @@ const PatientWelcome = ({ room }) => {
     </div>
   );
 };
+
+function ButtonInput({ name, addButtonIssue }) {
+  return (
+    <Button
+      hoverColor="bg-contessa-200"
+      className="border bg-contessa-500 p-3 font-semibold text-white"
+      onClick={() => {
+        addButtonIssue(name);
+      }}
+    >
+      {name}
+    </Button>
+  );
+}
 
 export default PatientWelcome;

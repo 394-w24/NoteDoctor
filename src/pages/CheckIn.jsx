@@ -98,7 +98,6 @@ const CheckIn = () => {
           <FormInput
             label="Height"
             name="height"
-            value={inputs.height}
             valid={inputValidaty.height}
             errmsg={"Please use the right height format. eg. 5'10\""}
             changeHandler={(val) =>
@@ -108,7 +107,6 @@ const CheckIn = () => {
           <FormInput
             label="Weight"
             name="weight"
-            value={inputs.weight}
             valid={inputValidaty.weight}
             errmsg={
               "Please make sure input the right weight. eg. a positive number"
@@ -120,7 +118,6 @@ const CheckIn = () => {
           <FormInput
             label="Respiration Rate"
             name="respRate"
-            value={inputs.respRate}
             valid={inputValidaty.respRate}
             errmsg={
               "Please make sure input the right respiration rate. eg. a positive integer"
@@ -132,7 +129,6 @@ const CheckIn = () => {
           <FormInput
             label="Pulse"
             name="pulse"
-            value={inputs.pulse}
             valid={inputValidaty.pulse}
             errmsg={
               "Please make sure input the right pulse. eg. a positive integer"
@@ -144,7 +140,6 @@ const CheckIn = () => {
           <FormInput
             label="Blood Pressure"
             name="bp"
-            value={inputs.bp}
             valid={inputValidaty.bp}
             errmsg={"Please use the right blood pressure format. eg. 120/60"}
             changeHandler={(val) => setInputs((prev) => ({ ...prev, bp: val }))}

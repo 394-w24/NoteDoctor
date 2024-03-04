@@ -30,9 +30,12 @@ const PatientWelcome = ({ room }) => {
     return `About ${roundedMinutes} minutes`;
   };
   useEffect(() => {
-    const waitTime = getWaitTime(room.appointment.date);
-
+    async function fetchData() {
+    const waitTime = await getWaitTime(room.appointment.date);
     setWaitTime(waitTime);
+    }
+    fetchData()
+
   }, [room.appointment.date]);
   // const waitTime = useRealtimeWaitTime(room.appointment.date);
   const waitTimeString =

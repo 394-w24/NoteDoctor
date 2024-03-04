@@ -162,7 +162,7 @@ export const getCareGiver = async (uuid) => {
   }
 };
 
-export const getWaitTime = async (uuid) => {
+export const getWaitTime = async (date) => {
   const q = query(
     collection(db, "appointments"),
     orderBy("date", "desc"),
@@ -170,9 +170,15 @@ export const getWaitTime = async (uuid) => {
     where("date", "<", date),
     limit(1),
   );
+
   const apptSnapshots = await getDocs(q);
-  const recentAppt = querySnapshots[0].data();
-  console.log(recentAppt);
+  if (apptSnapshots.docs[0]) {
+    const recentAppt = apptSnapshots.docs[0].data();
+    return addMinutes(recentAppt.date.toDate(), recentAppt.duration);
+  }
+  else {
+    return date;
+  }
 };
 
 export const useRealTimeDoc = (docPathArray) => {

@@ -5,7 +5,7 @@ import {
   formatDistanceToNow,
   subMinutes,
 } from "date-fns";
-import { Modal, Button } from "flowbite-react";
+import { Button, Modal } from "flowbite-react";
 import { X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -35,21 +35,20 @@ const PatientWelcome = ({ room }) => {
   };
   useEffect(() => {
     async function fetchData() {
-    const waitTime = await getWaitTime(room.appointment.date);
-    setWaitTime(waitTime);
+      const waitTime = await getWaitTime(room.appointment.date);
+      setWaitTime(waitTime);
     }
-    fetchData()
+    fetchData();
 
     const getId = setInterval(() => {
-        setWaitTime((prev)=>{
-          return subMinutes(prev,1)
-        })
-    },1000);
+      setWaitTime((prev) => {
+        return subMinutes(prev, 1);
+      });
+    }, 1000);
 
     return () => {
       clearInterval(getId);
-    }
-
+    };
   }, [room.appointment.date]);
   // const waitTime = useRealtimeWaitTime(room.appointment.date);
   const waitTimeString =
@@ -144,7 +143,7 @@ const PatientWelcome = ({ room }) => {
           </ul>
         </div>
         <button
-          className="bg-contessa-500 border border-black/50 px-4 py-2 font-semibold text-white shadow-lg"
+          className="border border-black/50 bg-contessa-500 px-4 py-2 font-semibold text-white shadow-lg"
           onClick={() => checkOut(room.name)}
         >
           End Appointment
@@ -158,14 +157,14 @@ const PatientWelcome = ({ room }) => {
               <Link
                 key={index}
                 to={`/staffBio/${caregiver.id}`}
-                className="flex flex-col items-center gap-2"
+                className="flex flex-col items-center gap-2 rounded-md border p-2 shadow hover:bg-gray-100/80"
               >
                 <img
                   src={caregiver.image}
                   alt={`${caregiver.firstName} ${caregiver.lastName}`}
                   className="aspect-square h-32 w-32 rounded-full"
                 />
-                <p>
+                <p className="font-semibold text-blue-600 underline">
                   {caregiver.firstName} {caregiver.lastName}
                 </p>
               </Link>
@@ -243,7 +242,7 @@ function ButtonInput({ name, addButtonIssue }) {
   return (
     <Button
       hoverColor="bg-contessa-200"
-      className="border bg-contessa-500 p-3 font-semibold text-white"
+      className="border bg-contessa-500 px-2 font-semibold text-white"
       onClick={() => {
         addButtonIssue(name);
       }}

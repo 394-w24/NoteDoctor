@@ -6,11 +6,12 @@ import {
 } from "date-fns";
 import { Modal } from "flowbite-react";
 import { X } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   addIssues,
   checkOut,
+  getWaitTime,
   removeIssue,
   useRealtimeWaitTime,
 } from "../utils/firebase";
@@ -18,6 +19,7 @@ import { DateHeader } from "./DateHeader";
 
 const PatientWelcome = ({ room }) => {
   const [open, setOpen] = useState(false);
+  const [waitTime, setWaitTime] = useState(0);
   const [issuesControl, setIssuesControl] = useState("");
   const [additionalIssues, setAdditionalIssues] = useState(
     room.appointment.issues,
@@ -27,7 +29,12 @@ const PatientWelcome = ({ room }) => {
     const roundedMinutes = Math.abs(Math.round(minutesDifference / 5)) * 5; // Round to the nearest fifth
     return `About ${roundedMinutes} minutes`;
   };
-  const waitTime = useRealtimeWaitTime(room.appointment.date);
+  useEffect(() => {
+    const waitTime = getWaitTime(room.appointment.date);
+
+    setWaitTime(waitTime);
+  }, [room.appointment.date]);
+  // const waitTime = useRealtimeWaitTime(room.appointment.date);
   const waitTimeString =
     waitTime > 0
       ? formatDistanceToNowInRoundedMinutes(waitTime)
@@ -78,7 +85,10 @@ const PatientWelcome = ({ room }) => {
             className="aspect-square h-32 w-min rounded-full"
           />
         </div>
-        <h2 className="text-2xl"><span className="font-semibold">Expected Wait Time: </span> {waitTimeString}</h2>
+        <h2 className="text-2xl">
+          <span className="font-semibold">Expected Wait Time: </span>{" "}
+          {waitTimeString}
+        </h2>
         <div className="mt-10 flex flex-col">
           <p>
             <span className="font-semibold">Date of Birth: </span>

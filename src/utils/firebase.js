@@ -7,6 +7,7 @@ import {
   collection,
   doc,
   getDoc,
+  getDocs,
   getFirestore,
   limit,
   onSnapshot,
@@ -90,7 +91,7 @@ export const checkOut = async (uuid) => {
   const docRoom = doc(db, "rooms", uuid);
   const docSnap = await getDoc(docRoom);
   setDoc(docSnap.data().appointment, { status: "checkedOut" }, { merge: true });
-  setDoc(docRoom, { appointment: null, confirmed: false}, { merge: true });
+  setDoc(docRoom, { appointment: null, confirmed: false }, { merge: true });
 };
 
 export const getAppt = async (uuid) => {
@@ -159,6 +160,19 @@ export const getCareGiver = async (uuid) => {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
   }
+};
+
+export const getWaitTime = async (uuid) => {
+  const q = query(
+    collection(db, "appointments"),
+    orderBy("date", "desc"),
+    where("status", "==", "checkedIn"),
+    where("date", "<", date),
+    limit(1),
+  );
+  const apptSnapshots = await getDocs(q);
+  const recentAppt = querySnapshots[0].data();
+  console.log(recentAppt);
 };
 
 export const useRealTimeDoc = (docPathArray) => {

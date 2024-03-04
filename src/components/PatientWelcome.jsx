@@ -3,14 +3,16 @@ import {
   differenceInYears,
   format,
   formatDistanceToNow,
+  subMinutes,
 } from "date-fns";
 import { Modal } from "flowbite-react";
 import { X } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   addIssues,
   checkOut,
+  getWaitTime,
   removeIssue,
   useRealtimeWaitTime,
 } from "../utils/firebase";
@@ -18,16 +20,38 @@ import { DateHeader } from "./DateHeader";
 
 const PatientWelcome = ({ room }) => {
   const [open, setOpen] = useState(false);
+  const [waitTime, setWaitTime] = useState(0);
   const [issuesControl, setIssuesControl] = useState("");
   const [additionalIssues, setAdditionalIssues] = useState(
     room.appointment.issues,
   );
   const formatDistanceToNowInRoundedMinutes = (date) => {
-    const minutesDifference = differenceInMinutes(new Date(), date);
-    const roundedMinutes = Math.abs(Math.round(minutesDifference / 5)) * 5; // Round to the nearest fifth
+    const minutesDifference = differenceInMinutes(date, new Date());
+    const roundedMinutes = Math.round(minutesDifference / 5) * 5; // Round to the nearest fifth
+    if (roundedMinutes <= 0) {
+      return "The doctor will see you shortly";
+    }
     return `About ${roundedMinutes} minutes`;
   };
-  const waitTime = useRealtimeWaitTime(room.appointment.date);
+  useEffect(() => {
+    async function fetchData() {
+    const waitTime = await getWaitTime(room.appointment.date);
+    setWaitTime(waitTime);
+    }
+    fetchData()
+
+    const getId = setInterval(() => {
+        setWaitTime((prev)=>{
+          return subMinutes(prev,1)
+        })
+    },1000);
+
+    return () => {
+      clearInterval(getId);
+    }
+
+  }, [room.appointment.date]);
+  // const waitTime = useRealtimeWaitTime(room.appointment.date);
   const waitTimeString =
     waitTime > 0
       ? formatDistanceToNowInRoundedMinutes(waitTime)
@@ -78,7 +102,10 @@ const PatientWelcome = ({ room }) => {
             className="aspect-square h-32 w-min rounded-full"
           />
         </div>
-        <h2 className="text-2xl"><span className="font-semibold">Expected Wait Time: </span> {waitTimeString}</h2>
+        <h2 className="text-2xl">
+          <span className="font-semibold">Expected Wait Time: </span>{" "}
+          {waitTimeString}
+        </h2>
         <div className="mt-10 flex flex-col">
           <p>
             <span className="font-semibold">Date of Birth: </span>

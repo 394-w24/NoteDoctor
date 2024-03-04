@@ -45,6 +45,15 @@ const PatientWelcome = ({ room }) => {
       setOpen(false);
     }
   };
+
+  const addButtonIssue = (issue) => {
+    if (issuesControl === "") {
+      setIssuesControl(issue);
+    } else {
+      setIssuesControl(issue + "\n" + issuesControl);
+    }    
+  };
+
   const handleRemoveIssue = (issue, index) => {
     removeIssue(room.appointment, issue);
     setAdditionalIssues([
@@ -78,7 +87,10 @@ const PatientWelcome = ({ room }) => {
             className="aspect-square h-32 w-min rounded-full"
           />
         </div>
-        <h2 className="text-2xl"><span className="font-semibold">Expected Wait Time: </span> {waitTimeString}</h2>
+        <h2 className="text-2xl">
+          <span className="font-semibold">Expected Wait Time: </span>{" "}
+          {waitTimeString}
+        </h2>
         <div className="mt-10 flex flex-col">
           <p>
             <span className="font-semibold">Date of Birth: </span>
@@ -160,32 +172,19 @@ const PatientWelcome = ({ room }) => {
       <Modal show={open} onClose={() => setOpen(false)}>
         <Modal.Header>Add Additional Issue</Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleSubmit} className="flex flex-col py-5">
+          <form onSubmit={handleSubmit} className="flex flex-col">
             <p className="text-sm font-semibold text-gray-800">
-              Tap to add any additional issue(s) you would like to address with the doctor.
+              Tap to add any additional issue(s) you would like to address with
+              the doctor.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button>
-                Contraception
-              </Button>
-              <Button>
-                Breasts
-              </Button>
-              <Button>
-                Period
-              </Button>
-              <Button>
-                Hormonal birth control options
-              </Button>
-              <Button>
-                Non-hormonal birth control options
-              </Button>
-              <Button>
-                Experiencing birth control side effects
-              </Button>
-              <Button>
-                IUD
-              </Button>
+              <ButtonInput name="Contraception" addButtonIssue={addButtonIssue}/>
+              <ButtonInput name="Breasts" addButtonIssue={addButtonIssue}/>
+              <ButtonInput name="Period" addButtonIssue={addButtonIssue}/>
+              <ButtonInput name="Hormonal birth control option" addButtonIssue={addButtonIssue}/>
+              <ButtonInput name="Non-hormonal birth control options" addButtonIssue={addButtonIssue}/>
+              <ButtonInput name="Experiencing birth control side effects" addButtonIssue={addButtonIssue}/>
+              <ButtonInput name="IUD" addButtonIssue={addButtonIssue}/>
             </div>
             <p className="text-sm font-semibold text-gray-800">
               Separate multiple issues with either a comma or a new line
@@ -203,5 +202,13 @@ const PatientWelcome = ({ room }) => {
     </div>
   );
 };
+
+
+
+function ButtonInput({ name, addButtonIssue }) {
+  return (
+    <Button onClick={() => {addButtonIssue(name)}}>{name}</Button>
+  );
+}
 
 export default PatientWelcome;

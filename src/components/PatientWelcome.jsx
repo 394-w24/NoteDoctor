@@ -26,8 +26,11 @@ const PatientWelcome = ({ room }) => {
     room.appointment.issues,
   );
   const formatDistanceToNowInRoundedMinutes = (date) => {
-    const minutesDifference = differenceInMinutes(new Date(), date);
-    const roundedMinutes = Math.abs(Math.round(minutesDifference / 5)) * 5; // Round to the nearest fifth
+    const minutesDifference = differenceInMinutes(date, new Date());
+    const roundedMinutes = Math.round(minutesDifference / 5) * 5; // Round to the nearest fifth
+    if (roundedMinutes <= 0) {
+      return "The doctor will see you shortly";
+    }
     return `About ${roundedMinutes} minutes`;
   };
   useEffect(() => {
@@ -42,6 +45,10 @@ const PatientWelcome = ({ room }) => {
           return subMinutes(prev,1)
         })
     },1000);
+
+    return () => {
+      clearInterval(getId);
+    }
 
   }, [room.appointment.date]);
   // const waitTime = useRealtimeWaitTime(room.appointment.date);

@@ -4,7 +4,7 @@ import {
   format,
   formatDistanceToNow,
 } from "date-fns";
-import { Modal } from "flowbite-react";
+import { Modal, Button } from "flowbite-react";
 import { X } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -161,6 +161,32 @@ const PatientWelcome = ({ room }) => {
         <Modal.Header>Add Additional Issue</Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit} className="flex flex-col">
+            <p className="text-sm font-semibold text-gray-800">
+              Tap to add any additional issue(s) you would like to address with the doctor.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Button>
+                Contraception
+              </Button>
+              <Button>
+                Breasts
+              </Button>
+              <Button>
+                Period
+              </Button>
+              <Button>
+                Hormonal birth control options
+              </Button>
+              <Button>
+                Non-hormonal birth control options
+              </Button>
+              <Button>
+                Experiencing birth control side effects
+              </Button>
+              <Button>
+                IUD
+              </Button>
+            </div>
             <p className="text-sm font-semibold text-gray-800">
               Separate multiple issues with either a comma or a new line
             </p>

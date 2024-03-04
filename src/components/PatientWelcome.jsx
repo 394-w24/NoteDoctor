@@ -3,6 +3,7 @@ import {
   differenceInYears,
   format,
   formatDistanceToNow,
+  subMinutes,
 } from "date-fns";
 import { Modal } from "flowbite-react";
 import { X } from "lucide-react";
@@ -35,6 +36,12 @@ const PatientWelcome = ({ room }) => {
     setWaitTime(waitTime);
     }
     fetchData()
+
+    const getId = setInterval(() => {
+        setWaitTime((prev)=>{
+          return subMinutes(prev,1)
+        })
+    },1000);
 
   }, [room.appointment.date]);
   // const waitTime = useRealtimeWaitTime(room.appointment.date);

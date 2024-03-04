@@ -160,7 +160,7 @@ const PatientWelcome = ({ room }) => {
       <Modal show={open} onClose={() => setOpen(false)}>
         <Modal.Header>Add Additional Issue</Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleSubmit} className="flex flex-col">
+          <form onSubmit={handleSubmit} className="flex flex-col py-5">
             <p className="text-sm font-semibold text-gray-800">
               Tap to add any additional issue(s) you would like to address with the doctor.
             </p>

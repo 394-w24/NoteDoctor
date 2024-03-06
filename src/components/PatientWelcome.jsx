@@ -3,14 +3,16 @@ import {
   differenceInYears,
   format,
   formatDistanceToNow,
+  subMinutes,
 } from "date-fns";
-import { Modal } from "flowbite-react";
+import { Button, Modal } from "flowbite-react";
 import { X } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   addIssues,
   checkOut,
+  getWaitTime,
   removeIssue,
   useRealtimeWaitTime,
 } from "../utils/firebase";
@@ -18,16 +20,37 @@ import { DateHeader } from "./DateHeader";
 
 const PatientWelcome = ({ room }) => {
   const [open, setOpen] = useState(false);
+  const [waitTime, setWaitTime] = useState(0);
   const [issuesControl, setIssuesControl] = useState("");
   const [additionalIssues, setAdditionalIssues] = useState(
     room.appointment.issues,
   );
   const formatDistanceToNowInRoundedMinutes = (date) => {
-    const minutesDifference = differenceInMinutes(new Date(), date);
-    const roundedMinutes = Math.abs(Math.round(minutesDifference / 5)) * 5; // Round to the nearest fifth
+    const minutesDifference = differenceInMinutes(date, new Date());
+    const roundedMinutes = Math.round(minutesDifference / 5) * 5; // Round to the nearest fifth
+    if (roundedMinutes <= 0) {
+      return "The doctor will see you shortly";
+    }
     return `About ${roundedMinutes} minutes`;
   };
-  const waitTime = useRealtimeWaitTime(room.appointment.date);
+  useEffect(() => {
+    async function fetchData() {
+      const waitTime = await getWaitTime(room.appointment.date);
+      setWaitTime(waitTime);
+    }
+    fetchData();
+
+    const getId = setInterval(() => {
+      setWaitTime((prev) => {
+        return subMinutes(prev, 1);
+      });
+    }, 1000);
+
+    return () => {
+      clearInterval(getId);
+    };
+  }, [room.appointment.date]);
+  // const waitTime = useRealtimeWaitTime(room.appointment.date);
   const waitTimeString =
     waitTime > 0
       ? formatDistanceToNowInRoundedMinutes(waitTime)
@@ -45,6 +68,15 @@ const PatientWelcome = ({ room }) => {
       setOpen(false);
     }
   };
+
+  const addButtonIssue = (issue) => {
+    if (issuesControl === "") {
+      setIssuesControl(issue);
+    } else {
+      setIssuesControl(issue + "\n" + issuesControl);
+    }
+  };
+
   const handleRemoveIssue = (issue, index) => {
     removeIssue(room.appointment, issue);
     setAdditionalIssues([
@@ -78,7 +110,10 @@ const PatientWelcome = ({ room }) => {
             className="aspect-square h-32 w-min rounded-full"
           />
         </div>
-        <h2 className="text-2xl"><span className="font-semibold">Expected Wait Time: </span> {waitTimeString}</h2>
+        <h2 className="text-2xl">
+          <span className="font-semibold">Expected Wait Time: </span>{" "}
+          {waitTimeString}
+        </h2>
         <div className="mt-10 flex flex-col">
           <p>
             <span className="font-semibold">Date of Birth: </span>
@@ -122,14 +157,14 @@ const PatientWelcome = ({ room }) => {
               <Link
                 key={index}
                 to={`/staffBio/${caregiver.id}`}
-                className="flex flex-col items-center gap-2"
+                className="flex flex-col items-center gap-2 rounded-md border p-2 shadow hover:bg-gray-100/80"
               >
                 <img
                   src={caregiver.image}
                   alt={`${caregiver.firstName} ${caregiver.lastName}`}
                   className="aspect-square h-32 w-32 rounded-full"
                 />
-                <p>
+                <p className="font-semibold text-blue-600 underline">
                   {caregiver.firstName} {caregiver.lastName}
                 </p>
               </Link>
@@ -162,6 +197,31 @@ const PatientWelcome = ({ room }) => {
         <Modal.Body>
           <form onSubmit={handleSubmit} className="flex flex-col">
             <p className="text-sm font-semibold text-gray-800">
+              Tap to add any additional issue(s) you would like to address with
+              the doctor.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <ButtonInput name="IUD" addButtonIssue={addButtonIssue} />
+              <ButtonInput
+                name="Contraception"
+                addButtonIssue={addButtonIssue}
+              />
+              <ButtonInput name="Breasts" addButtonIssue={addButtonIssue} />
+              <ButtonInput
+                name="Experiencing birth control side effects"
+                addButtonIssue={addButtonIssue}
+              />
+              <ButtonInput name="Period" addButtonIssue={addButtonIssue} />
+              <ButtonInput
+                name={"Hormonal birth control option"}
+                addButtonIssue={addButtonIssue}
+              />
+              <ButtonInput
+                name="Non-hormonal birth control options"
+                addButtonIssue={addButtonIssue}
+              />
+            </div>
+            <p className="text-sm font-semibold text-gray-800">
               Separate multiple issues with either a comma or a new line
             </p>
             <textarea rows={10} value={issuesControl} onChange={handleChange} />
@@ -177,5 +237,19 @@ const PatientWelcome = ({ room }) => {
     </div>
   );
 };
+
+function ButtonInput({ name, addButtonIssue }) {
+  return (
+    <Button
+      hoverColor="bg-contessa-200"
+      className="border bg-contessa-500 px-2 font-semibold text-white"
+      onClick={() => {
+        addButtonIssue(name);
+      }}
+    >
+      {name}
+    </Button>
+  );
+}
 
 export default PatientWelcome;

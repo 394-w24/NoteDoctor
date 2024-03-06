@@ -22,6 +22,7 @@ const PatientWelcome = ({ room }) => {
   const [open, setOpen] = useState(false);
   const [waitTime, setWaitTime] = useState(0);
   const [issuesControl, setIssuesControl] = useState("");
+  const [selectedMainCategory, setSelectedMainCategory] = useState("");
   const [additionalIssues, setAdditionalIssues] = useState(
     room.appointment.issues,
   );
@@ -202,9 +203,14 @@ const PatientWelcome = ({ room }) => {
             </p>
             <div className="flex flex-wrap gap-3">
               <ButtonInput name="IUD" addButtonIssue={addButtonIssue} />
-              <ButtonInput
+              {/* <ButtonInput
                 name="Contraception"
                 addButtonIssue={addButtonIssue}
+              /> */}
+              <ButtonInput
+                name="Contraception" addButtonIssue={addButtonIssue}
+                onClick={() => setSelectedMainCategory("Contraception")
+              }
               />
               <ButtonInput name="Breasts" addButtonIssue={addButtonIssue} />
               <ButtonInput
@@ -212,12 +218,16 @@ const PatientWelcome = ({ room }) => {
                 addButtonIssue={addButtonIssue}
               />
               <ButtonInput name="Period" addButtonIssue={addButtonIssue} />
-              <ButtonInput
+              {/* <ButtonInput
                 name={"Hormonal birth control option"}
                 addButtonIssue={addButtonIssue}
               />
               <ButtonInput
                 name="Non-hormonal birth control options"
+                addButtonIssue={addButtonIssue}
+              /> */}
+              <SubCategoryButtons
+                mainCategory={selectedMainCategory}
                 addButtonIssue={addButtonIssue}
               />
             </div>
@@ -238,7 +248,7 @@ const PatientWelcome = ({ room }) => {
   );
 };
 
-function ButtonInput({ name, addButtonIssue }) {
+function ButtonInput({ name, onClick, addButtonIssue }) {
   return (
     <Button
       hoverColor="bg-contessa-200"
@@ -250,6 +260,30 @@ function ButtonInput({ name, addButtonIssue }) {
       {name}
     </Button>
   );
+}
+
+function SubCategoryButtons({ mainCategory, addButtonIssue }) {
+  const subCategories = {
+    Contraception: ["Hormonal birth control option", "Non-hormonal birth control options"],
+    // Add other main categories and their sub-categories as needed
+  };
+
+  if (!mainCategory || !subCategories[mainCategory]) {
+    return null;
+  }
+
+  return subCategories[mainCategory].map((name) => (
+    <Button
+      key={name}
+      hoverColor="bg-contessa-200"
+      className="border bg-contessa-500 px-2 font-semibold text-white"
+      onClick={() => {
+        addButtonIssue(name);
+      }}
+    >
+      {name}
+    </Button>
+  ));
 }
 
 export default PatientWelcome;

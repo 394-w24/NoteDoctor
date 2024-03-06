@@ -12,7 +12,6 @@ const getCurrentTimePlusNMinutes = (n) => {
 
 const Backdoor = () => {
     const data = useRealtimeAppointments();
-    console.log(data);
     return (
         <div className="mx-8 my-4">
             <h1>Reset Appointments</h1>
@@ -30,7 +29,7 @@ function AppointmentCard({ appointment }) {
         const newValue = parseInt(event.target.value, 10);
         setApptOffset(newValue);
     };
-
+    
     if (appointment.status === "checkedIn" && isDateInPast(appointment.date.toDate()))
         return (
             <div className="flex rounded-lg border-2 border-blue-700 bg-blue-100 p-4 shadow-lg">

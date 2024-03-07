@@ -6,7 +6,7 @@ import {
   subMinutes,
 } from "date-fns";
 import { Button, Modal } from "flowbite-react";
-import { X } from "lucide-react";
+import { ArrowLeft, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -25,6 +25,7 @@ const PatientWelcome = ({ room }) => {
   const [additionalIssues, setAdditionalIssues] = useState(
     room.appointment.issues,
   );
+  const [topIssues, setTopIssues] = useState("");
   const formatDistanceToNowInRoundedMinutes = (date) => {
     const minutesDifference = differenceInMinutes(date, new Date());
     const roundedMinutes = Math.round(minutesDifference / 5) * 5; // Round to the nearest fifth
@@ -50,7 +51,36 @@ const PatientWelcome = ({ room }) => {
       clearInterval(getId);
     };
   }, [room.appointment.date]);
-  // const waitTime = useRealtimeWaitTime(room.appointment.date);
+  const preDefinedIssues = {
+    Contraception: [
+      "Hormonal birth control options",
+      "Non-hormonal birth control options",
+      "Experiencing birth control side effects",
+      "IUD Insertion",
+      "IUD Removal",
+    ],
+    "Sex and Sexual Health": [
+      "Painful sex",
+      "Vaginal dryness",
+      "Lack of desire",
+      "Lack of arousal",
+      "Lack of orgasm",
+    ],
+    "Emotional well-being": [
+      "Depression",
+      "Anxiety",
+      "Fatigue",
+      "Sleep disturbances",
+    ],
+    "Nutrition and Lifestyle": [
+      "Safe over-the-counter medications",
+      "Dietary recommendations",
+      "Safe exercise recommendations",
+      "Pre-natal supplement needs",
+      "Other lifestyle changes",
+    ],
+  };
+
   const waitTimeString =
     waitTime > 0
       ? formatDistanceToNowInRoundedMinutes(waitTime)
@@ -201,25 +231,36 @@ const PatientWelcome = ({ room }) => {
               the doctor.
             </p>
             <div className="flex flex-wrap gap-3">
-              <ButtonInput name="IUD" addButtonIssue={addButtonIssue} />
-              <ButtonInput
-                name="Contraception"
-                addButtonIssue={addButtonIssue}
-              />
-              <ButtonInput name="Breasts" addButtonIssue={addButtonIssue} />
-              <ButtonInput
-                name="Experiencing birth control side effects"
-                addButtonIssue={addButtonIssue}
-              />
-              <ButtonInput name="Period" addButtonIssue={addButtonIssue} />
-              <ButtonInput
-                name={"Hormonal birth control option"}
-                addButtonIssue={addButtonIssue}
-              />
-              <ButtonInput
-                name="Non-hormonal birth control options"
-                addButtonIssue={addButtonIssue}
-              />
+              {topIssues == "" ? (
+                Object.keys(preDefinedIssues).map((issue, index) => (
+                  <TopLevelButtonInput
+                    key={index}
+                    name={issue}
+                    setTopIssues={setTopIssues}
+                  />
+                ))
+              ) : (
+                <div>
+                  <h4
+                    className="flex cursor-pointer gap-4 font-bold text-gray-700 underline"
+                    onClick={() => setTopIssues("")}
+                  >
+                    <ArrowLeft />
+                    {topIssues}
+                  </h4>
+                  <hr className="border-gray-300" />
+                  <br />
+                  <span className="flex flex-wrap gap-2">
+                    {preDefinedIssues[topIssues].map((issue, index) => (
+                      <ButtonInput
+                        name={issue}
+                        key={index}
+                        addButtonIssue={addButtonIssue}
+                      />
+                    ))}
+                  </span>
+                </div>
+              )}
             </div>
             <p className="text-sm font-semibold text-gray-800">
               Separate multiple issues with either a comma or a new line
@@ -238,11 +279,24 @@ const PatientWelcome = ({ room }) => {
   );
 };
 
+function TopLevelButtonInput({ name, setTopIssues }) {
+  return (
+    <Button
+      className="border bg-contessa-500 px-2 font-semibold text-white hover:bg-contessa-200"
+      onClick={() => {
+        console.log(name);
+        setTopIssues(name);
+      }}
+    >
+      {name}
+    </Button>
+  );
+}
+
 function ButtonInput({ name, addButtonIssue }) {
   return (
     <Button
-      hoverColor="bg-contessa-200"
-      className="border bg-contessa-500 px-2 font-semibold text-white"
+      className="border bg-contessa-500 px-0 font-semibold text-white hover:bg-contessa-200"
       onClick={() => {
         addButtonIssue(name);
       }}

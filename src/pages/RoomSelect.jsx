@@ -5,6 +5,26 @@ const RoomSelect = () => {
   const data = useRealTimeCollection(["rooms"]);
   console.log(data);
 
+  if (!data) {
+    return <p>Loading...</p>;
+  }
+
+  if (data instanceof Error) {
+    return <p>{data.message}</p>;
+  }
+
+  if (!data.length) {
+    return <p>No rooms available</p>;
+  }
+
+  if (data.every((room) => room.appointment)) {
+    return <p>No free rooms available</p>;
+  }
+
+  if (data.every((room) => !room.appointment)) {
+    return <p>No occupied rooms available</p>;
+  }
+
   return (
     <div className="mx-8 my-4">
       <h1 className="mb-8 text-3xl font-bold">What room is this?</h1>
@@ -38,5 +58,7 @@ function RoomCard({ room }) {
     </Link>
   );
 }
+
+
 
 export default RoomSelect;

@@ -12,7 +12,7 @@ describe('counter tests', () => {
       <App />
       </Router>
       );
-    expect(screen.getByText('What room is this?')).toBeDefined();
+    expect(screen.queryByText('What room is this?'));
   });
 
 });

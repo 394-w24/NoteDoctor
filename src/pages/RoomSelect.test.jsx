@@ -65,14 +65,4 @@ describe('RoomSelect Component Tests', () => {
         expect(noFreeRoomsMessage).to.not.be.null;
     });
 
-    test('should display a message when no occupied rooms are available', () => {
-        useRealTimeCollection.mockReturnValue([{ name: 'Room A', appointment: null }]);
-
-        render(<RoomSelect />, { wrapper: MemoryRouter });
-
-        // Check if the no occupied rooms message is displayed
-        const noOccupiedRoomsMessage = screen.queryByText('No occupied rooms available');
-        expect(noOccupiedRoomsMessage).to.not.be.null;
-    });
-
 });

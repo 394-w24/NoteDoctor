@@ -24,10 +24,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// const app = initializeApp(firebaseConfig);
 
 // Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app);
+// const db = getFirestore(app);
 
 /**
  * Retrieves patient data from Firestore using the provided UUID.

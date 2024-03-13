@@ -1,0 +1,225 @@
+{
+  "__collections__": {
+    "appointments": {
+      "D5NkmeVyH8v9soWuaqXo": {
+        "type": "Annual Exam",
+        "room": null,
+        "caregivers": [
+          {
+            "__datatype__": "documentReference",
+            "value": "caregivers/a8be0g5CGUvm3ARLAxDb"
+          },
+          {
+            "__datatype__": "documentReference",
+            "value": "caregivers/z9ZdRZu3ybazgx59vW75"
+          }
+        ],
+        "patient": {
+          "__datatype__": "documentReference",
+          "value": "patients/eeaTWowpsbmciEmZm3ab"
+        },
+        "details": [
+          "Breast Exam",
+          "Pelvic Exam",
+          "Pap smear & STD testing"
+        ],
+        "duration": 45,
+        "issues": [],
+        "bp": "120/60",
+        "pulse": 55,
+        "respRate": 33,
+        "weight": 100,
+        "height": "5'7\"",
+        "date": {
+          "__datatype__": "timestamp",
+          "value": {
+            "_seconds": 1710296246,
+            "_nanoseconds": 622000000
+          }
+        },
+        "status": "ArrivedAndWaiting",
+        "__collections__": {}
+      },
+      "KMa3tIVTBbLKpv9etNau": {
+        "patient": {
+          "__datatype__": "documentReference",
+          "value": "patients/2ScZbzYKjN7leSH2V6ro"
+        },
+        "type": "Annual Exam",
+        "room": null,
+        "caregivers": [
+          {
+            "__datatype__": "documentReference",
+            "value": "caregivers/a8be0g5CGUvm3ARLAxDb"
+          },
+          {
+            "__datatype__": "documentReference",
+            "value": "caregivers/z9ZdRZu3ybazgx59vW75"
+          }
+        ],
+        "details": [
+          "Breast Exam",
+          "Pelvic Exam",
+          "Pap smear & STD testing"
+        ],
+        "duration": 40,
+        "pulse": 55,
+        "respRate": 33,
+        "weight": 50,
+        "bp": "120/60",
+        "height": "5'8\"",
+        "issues": [
+          "Anxiety"
+        ],
+        "date": {
+          "__datatype__": "timestamp",
+          "value": {
+            "_seconds": 1710296251,
+            "_nanoseconds": 746000000
+          }
+        },
+        "status": "checkedIn",
+        "__collections__": {}
+      },
+      "MGFC7ecAIWzrabZKvQJ5": {
+        "type": "Annual Exam",
+        "room": null,
+        "caregivers": [
+          {
+            "__datatype__": "documentReference",
+            "value": "caregivers/a8be0g5CGUvm3ARLAxDb"
+          },
+          {
+            "__datatype__": "documentReference",
+            "value": "caregivers/z9ZdRZu3ybazgx59vW75"
+          }
+        ],
+        "patient": {
+          "__datatype__": "documentReference",
+          "value": "patients/mYmErYHtAjVkLRftpE2P"
+        },
+        "details": [
+          "Breast Exam",
+          "Pelvic Exam",
+          "Pap smear & STD testing"
+        ],
+        "duration": 45,
+        "bp": "120/60",
+        "issues": [],
+        "pulse": 34,
+        "respRate": 23,
+        "weight": 453,
+        "height": "3'4\"",
+        "date": {
+          "__datatype__": "timestamp",
+          "value": {
+            "_seconds": 1710296247,
+            "_nanoseconds": 369000000
+          }
+        },
+        "status": "checkedIn",
+        "__collections__": {}
+      }
+    },
+    "caregivers": {
+      "a8be0g5CGUvm3ARLAxDb": {
+        "firstName": "Maria",
+        "lastName": "Alverez",
+        "suffix": "RN",
+        "role": "nurse",
+        "image": "https://firebasestorage.googleapis.com/v0/b/notedoctor-d96e7.appspot.com/o/nurse.webp?alt=media&token=ae23d417-92d2-4151-9cf4-1783ea34d4ea",
+        "bio": "Maria Alvarez is a dedicated and compassionate registered nurse, known for her unwavering commitment to providing exceptional patient care. Born and raised in a tight-knit community, Maria developed a strong sense of empathy and a passion for helping others from an early age.  After completing her nursing education at a reputable institution, Maria began her career in healthcare with a focus on medical-surgical nursing. Her clinical expertise and attention to detail have earned her the respect of both colleagues and patients alike. Maria is highly skilled in administering medications, monitoring vital signs, and coordinating with interdisciplinary teams to ensure comprehensive patient care.  Beyond her technical proficiency, Maria's warm and comforting demeanor creates a supportive environment for patients during challenging times. She is known for her ability to communicate effectively, easing anxieties and building trust with those under her care.  Maria is also an advocate for continuous learning, regularly participating in professional development opportunities to stay abreast of the latest advancements in nursing practice. Her commitment to excellence extends beyond the hospital walls, as she actively engages in community outreach programs and health education initiatives.  In her free time, Maria enjoys spending time with her family, exploring nature, and volunteering for various charitable organizations. With her blend of clinical expertise and compassionate nature, Maria Alvarez stands as a beacon of care and kindness in the healthcare field.",
+        "__collections__": {}
+      },
+      "z9ZdRZu3ybazgx59vW75": {
+        "firstName": "Jennifer",
+        "lastName": "Valina",
+        "title": "Dr.",
+        "suffix": "MD",
+        "role": "doctor",
+        "image": "https://firebasestorage.googleapis.com/v0/b/notedoctor-d96e7.appspot.com/o/doctor.webp?alt=media&token=970e8f03-c170-44cf-b7bc-a3e044f65535",
+        "bio": "Dr. Valina graduated from The Ohio State University, completed her medical school training at Harvard Medical School, and her residency at Johns Hopkins Medical School. Board Certified in Obstetrics and Gynecology, Dr. Valina has been practicing for 28 years, the last seven at Women’s Health Clinic. She focuses on general Ob-Gyn care from adolescence to menopausal care and beyond. Her passion for women’s health care started well before medical school, and she finds the ability and training to be involved in primary care as well as surgical care of a patient very fulfilling. Plus, she says, “Delivering babies is just the sweetest!” Dr. Valina lives in Arlington Heights with her husband and three dogs. When not seeing patients, she enjoys spending time with her family, cooking, and traveling.",
+        "__collections__": {}
+      }
+    },
+    "patients": {
+      "2ScZbzYKjN7leSH2V6ro": {
+        "firstName": "Carly",
+        "lastName": "Lowell",
+        "dob": {
+          "__datatype__": "timestamp",
+          "value": {
+            "_seconds": 801982800,
+            "_nanoseconds": 159000000
+          }
+        },
+        "pronouns": "she/her",
+        "age": 28,
+        "gender": "Female",
+        "image": "https://firebasestorage.googleapis.com/v0/b/notedoctor-d96e7.appspot.com/o/patient.webp?alt=media&token=657468d6-ee97-434b-825c-7a7d994e3d42",
+        "__collections__": {}
+      },
+      "eeaTWowpsbmciEmZm3ab": {
+        "firstName": "Charlotte",
+        "lastName": "Kennedy",
+        "gender": "Female",
+        "dob": {
+          "__datatype__": "timestamp",
+          "value": {
+            "_seconds": -138308400,
+            "_nanoseconds": 159000000
+          }
+        },
+        "pronouns": "she/her",
+        "age": 58,
+        "image": "https://firebasestorage.googleapis.com/v0/b/notedoctor-d96e7.appspot.com/o/patient3.webp?alt=media&token=26e7ff5d-98b9-48fb-8d5f-3d68d290f4d9",
+        "__collections__": {}
+      },
+      "mYmErYHtAjVkLRftpE2P": {
+        "firstName": "Sofia",
+        "lastName": "Marquez",
+        "gender": "Female",
+        "dob": {
+          "__datatype__": "timestamp",
+          "value": {
+            "_seconds": 547794000,
+            "_nanoseconds": 159000000
+          }
+        },
+        "pronouns": "she/her",
+        "age": 28,
+        "image": "https://firebasestorage.googleapis.com/v0/b/notedoctor-d96e7.appspot.com/o/patient2.webp?alt=media&token=a11cbf75-ffcb-46e2-a4c6-8ffdb165e04c",
+        "__collections__": {}
+      }
+    },
+    "rooms": {
+      "220": {
+        "display": null,
+        "name": "220",
+        "appointment": {
+          "__datatype__": "documentReference",
+          "value": "appointments/MGFC7ecAIWzrabZKvQJ5"
+        },
+        "confirmed": true,
+        "__collections__": {}
+      },
+      "221": {
+        "display": null,
+        "name": "221",
+        "appointment": {
+          "__datatype__": "documentReference",
+          "value": "appointments/KMa3tIVTBbLKpv9etNau"
+        },
+        "confirmed": true,
+        "__collections__": {}
+      },
+      "222": {
+        "display": null,
+        "name": "222",
+        "appointment": null,
+        "confirmed": false,
+        "__collections__": {}
+      }
+    }
+  }
+}

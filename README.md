@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# Note Doctor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This website is created using [Vite](https://vitejs.dev/) and [React](https://react.dev/)\
+The Backend was done using [Firebase](https://firebase.google.com/) using their Hosting, Firestore Database, and storage for large image files.
 
 ## Available Scripts
 
@@ -9,7 +10,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
@@ -17,54 +18,34 @@ You may also see any lint errors in the console.
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This is run using [Vitest](https://vitest.dev/), which is similar to Jest.\
+See the section about [running tests](https://vitest.dev/guide/) for more information.
 
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
+This production build in the build folder can be deployed into most hosting providers.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+See the section about [deployment](https://vitejs.dev/guide/static-deploy) for more information.
 
-### `npm run eject`
+### `npm run serve`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+This is similar to npm start, but is less efficient, as it will use a production build to display in the Localhost
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `npm run coverage`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This is similar to npm test, but does not activate a GUI and will instead display the code coverage in the terminal
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Migrating to your own products
 
-## Learn More
+We have provided a `data.json` which contains the data from the database that we were using. This data can be cleaned to work generally for other databases, although this one is formatted to work best for **Firestore** Database from Firebase.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To use this data for free on firebase there are community npm packages to help.\
+`npm install -g node-firestore-import-export`\
+This will activate the command `firestore-import` globally on your system
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you were to use Firebase, create a project, and under the **Project Settings** -> **Service Accounts**, generate a new private key and save the resulting json into `credentials.json` in your new repository. While in your terminal in your new repository you can run, `firestore-import -a credentials.json -b data.json ` to import the data into firestore

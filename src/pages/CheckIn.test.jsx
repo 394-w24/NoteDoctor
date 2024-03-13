@@ -47,14 +47,54 @@ describe("FormInput in CheckIn Page", () => {
     // For height validation
     ["Height", "5'10''", /Please use the right height format. eg. 5'10"/],
     // For height validation
-    ["Weight", "error", /Please make sure input the right weight. eg. a positive number/],
+    [
+      "Weight",
+      "error",
+      /Please make sure input the right weight. eg. a positive number/,
+    ],
     // For height validation
-    ["Respiration Rate", "15.22", /Please make sure input the right respiration rate. eg. a positive integer/],
+    [
+      "Respiration Rate",
+      "15.22",
+      /Please make sure input the right respiration rate. eg. a positive integer/,
+    ],
     // For height validation
-    ["Pulse", "error", /Please make sure input the right pulse. eg. a positive integer/],
+    [
+      "Pulse",
+      "error",
+      /Please make sure input the right pulse. eg. a positive integer/,
+    ],
     // For height validation
-    ["Blood Pressure", "120/1000", /Please use the right blood pressure format. eg. 120\/60/],
-  ])("InputForm input validation check", async (placeholder, input, expected) => {
+    [
+      "Blood Pressure",
+      "120/1000",
+      /Please use the right blood pressure format. eg. 120\/60/,
+    ],
+  ])(
+    "InputForm input validation check",
+    async (placeholder, input, expected) => {
+      // Wrap CheckIn component with both QueryClientProvider and MemoryRouter
+      const queryClient = new QueryClient();
+      render(
+        <QueryClientProvider client={queryClient}>
+          <MemoryRouter>
+            <CheckIn />
+          </MemoryRouter>
+        </QueryClientProvider>,
+      );
+
+      // Find form inputs by their unique ids
+      const heightInput = screen.getByPlaceholderText(placeholder);
+
+      // Simulate user input
+      fireEvent.input(heightInput, { target: { value: input } });
+
+      // Assert the changes
+      expect(screen.getByText(expected));
+    },
+  );
+
+  test("Check In button is disabled if there is any invalid InputForm", async () => {
     // Wrap CheckIn component with both QueryClientProvider and MemoryRouter
     const queryClient = new QueryClient();
     render(
@@ -66,12 +106,47 @@ describe("FormInput in CheckIn Page", () => {
     );
 
     // Find form inputs by their unique ids
-    const heightInput = screen.getByPlaceholderText(placeholder);
+    const heightInput = screen.getByPlaceholderText("Height");
 
     // Simulate user input
-    fireEvent.input(heightInput, { target: { value: input } });
+    fireEvent.input(heightInput, { target: { value: "error" } });
+
+    // Example using getByRole if your button has a specific role
+    const button = screen.getByRole("button", { name: "Assign Room" });
 
     // Assert the changes
-    expect(screen.getByText(expected));
+    expect(button.disabled).to.be.true;
+  });
+
+  test("Check In button is enabled if all InputForms are valid", async () => {
+    // Wrap CheckIn component with both QueryClientProvider and MemoryRouter
+    const queryClient = new QueryClient();
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <CheckIn />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    // Find form inputs by their unique ids
+    const heightInput = screen.getByPlaceholderText("Height");
+    const weightInput = screen.getByPlaceholderText("Weight");
+    const respRateInput = screen.getByPlaceholderText("Respiration Rate");
+    const pulseInput = screen.getByPlaceholderText("Pulse");
+    const bpInput = screen.getByPlaceholderText("Blood Pressure");
+
+    // Simulate user input
+    fireEvent.input(heightInput, { target: { value: "5'10\"" } });
+    fireEvent.input(weightInput, { target: { value: "150" } });
+    fireEvent.input(respRateInput, { target: { value: "120" } });
+    fireEvent.input(pulseInput, { target: { value: "70" } });
+    fireEvent.input(bpInput, { target: { value: "120/60" } });
+
+    // Example using getByRole if your button has a specific role
+    const button = screen.getByRole("button", { name: "Assign Room" });
+
+    // Assert the changes
+    expect(button.disabled).to.be.false;
   });
 });

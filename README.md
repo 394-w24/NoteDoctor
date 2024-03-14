@@ -1,9 +1,5 @@
 ## NoteDoctor
 
-<p align="center">
-  <img src="https://github.com/394-w24/NoteDoctor/assets/85666623/f577c7d6-9239-478b-bf38-6dd5c187c43c" alt="Note Doctor Logo">
-</p>
-
 ## Introduction
 github repo name: 394-w24 / NoteDoctor
 
@@ -149,6 +145,7 @@ Note Doctor is engineered to enhance the user experience across various roles wi
 - [ ] Future Work and known issues
   - [ ] Multi-screen responsiveness for tablet and wide screen use
   - [ ] Fix issue where nurse can assign patient to already occupied room
+        
 ## Contributing
 
 Contributions to NoteDoctor are greatly appreciated! 
@@ -166,20 +163,11 @@ If you have a suggestion that would make this better, please fork the repo and c
 Professor Christopher Riesbeck: c-riesbeck@northwestern.edu <br/>
 CS394 Team Roster:
 
-- Benyella,Perry
-- Gonzalez,Aldiery Rene
-- Zhuoyuan,Li
-- Reichert,Rodney David
-- Shu,Dong
-- Quanyue,Xie
-- Haoyang,Yuan
-- Kelly,Mei
+- Perry Benyella - Aldiery Rene Gonzalez - Zhuoyuan Li - Rodney David Reichert - Dong Shu - Quanyue Xie - Haoyang Yuan - Kelly Mei
 
 MPD Team Roster:
 
-- Emily Zarefsky
-- Salonen, Dani
-- Bennett, Sarah
+- Emily Zarefsky - Dani Salonen - Sarah Bennett
 
 ## Acknowledgements
 

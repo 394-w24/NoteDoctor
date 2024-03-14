@@ -98,21 +98,32 @@ node version >= 16
 
 ## Usage
 
-The Note Doctor app is designed with a clear and intuitive user interface, comprising several screens, each catering to different roles and functionalities within the healthcare workflow.
+Note Doctor is engineered to enhance the user experience across various roles within the healthcare ecosystem. Each screen is purpose-built, focusing on ease of use, security, and efficiency.
 
-### Screen 1: Patient Display View
+### Screen 1: Patient Display View & Modal
 
-- **Purpose**: This view is specifically designed for patients. It provides them with a comprehensive overview of their upcoming appointments, care team details, and treatment history.
-- **Privacy First**: Before accessing their medical information, patients are required to verify their identity by providing their birthdate. This step ensures that sensitive health information remains confidential and is only accessible to the appropriate individuals.
+![1](https://github.com/394-w24/NoteDoctor/assets/85666623/5f14ef7f-0dec-4f7e-bb0d-a8267f17f222)
+![5](https://github.com/394-w24/NoteDoctor/assets/85666623/4bc9e1aa-ae20-4f48-a5d2-cce098b28ab4)
+
+
+- **Objective**: This interactive screen is tailored for patients to provide them with a detailed overview of their scheduled appointments and information about their care team.
+- **Security Measure**: To protect patient privacy, a birthdate verification is required as a security measure before any medical information is displayed.
+- **Issue Reporting**: Patients can conveniently report additional issues either by entering text or using the intuitive "click and add" functionality.
 
 ### Screen 2: Nurse Check-In View
+![2](https://github.com/394-w24/NoteDoctor/assets/85666623/9277b0fc-a716-48d7-be1f-96b3e6e2b532)
 
-- **Purpose**: Nurses utilize this screen to efficiently manage patient flow. They can assign patients to rooms, track the occupancy of rooms, and update patient statuses to optimize the allocation of hospital resources.
-- **Workflow Optimization**: By streamlining the process of patient room assignment, this view aids in reducing wait times and enhances the overall efficiency of the healthcare facility.
+- **Objective**: Nurses use this screen to streamline the check-in process by assigning patients to rooms, helping manage patient intake and the overall flow within the facility.
 
-### Screen 3: Backdoor View
+### Screen 3: Room Overview
+![3](https://github.com/394-w24/NoteDoctor/assets/85666623/123d24ee-96a3-42b7-848a-f50415a680d5)
 
-- **Demonstration Only**: The backdoor view is included to showcase the application's capabilities to stakeholders. It offers a behind-the-scenes look at the system's operation and is not intended for actual medical use.
+- **Objective**: This screen offers a real-time overview of room statuses, providing valuable information on room availability, which assists in resource management and allocation.
+
+### Screen 4: Backdoor View
+![4](https://github.com/394-w24/NoteDoctor/assets/85666623/2ed8718e-412a-43cf-9503-543dfad8a947)
+
+- **Demonstration Tool**: Included for demonstration purposes, the backdoor view provides a peek into the app's functionalities for evaluators and is not part of the actual medical use interface.
 
 
 ## Roadmap
@@ -135,9 +146,9 @@ The Note Doctor app is designed with a clear and intuitive user interface, compr
 - [X] Week 4 (3/1-3/7)
   - [x] Go/no go decision with product team
 
-- [X] Future Work
-  - [X] Multi-screen responsiveness for tablet and wide screen use
--
+- [ ] Future Work
+  - [ ] Multi-screen responsiveness for tablet and wide screen use
+
 ## Contributing
 
 Contributions to NoteDoctor are greatly appreciated! 
@@ -149,9 +160,6 @@ If you have a suggestion that would make this better, please fork the repo and c
 3. Commit your Changes (git commit -m 'Add some YourFeature')
 4. Push to the Branch (git push origin feature/YourFeature)
 5. Open a Pull Request
-
-## License
-MT License Copyright (c) 2022 Christopher
 
 ## Contact
 

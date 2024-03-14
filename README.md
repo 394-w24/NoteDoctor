@@ -36,6 +36,7 @@ The project is created by team Red in CS394 course taught by Professor Riesbeck 
 * [![Firebase][Firebase.js]][Firebase-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
   
 ## Features:
 
@@ -43,6 +44,8 @@ The project is created by team Red in CS394 course taught by Professor Riesbeck 
 - Patient privacy verification
 - Customized welcome page for patients
 - Symptom add-on functionality
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Prerequisites
 ```
@@ -66,6 +69,8 @@ node version >= 16
    npm start
    ```
    Please make sure you set up Firebase and then start to run. This command runs the app in development mode. Visit [http://localhost:5173](http://localhost:5173) in your browser. The app will automatically reload if you change any of the source files.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Detailed Firebase Setup
 
@@ -122,6 +127,8 @@ node version >= 16
      ```
      Replace `path/to/your/credentials.json` and `path/to/your/data.json` with the actual paths to your files.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Usage
 
 Note Doctor is engineered to enhance the user experience across various roles within the healthcare ecosystem. Each screen is purpose-built, focusing on ease of use, security, and efficiency.
@@ -151,6 +158,7 @@ Note Doctor is engineered to enhance the user experience across various roles wi
 
 - **Demonstration Tool**: Included for demonstration purposes, the backdoor view provides a peek into the app's functionalities for evaluators and is not part of the actual medical use interface.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Roadmap
 
@@ -175,6 +183,8 @@ Note Doctor is engineered to enhance the user experience across various roles wi
 - [ ] Future Work and known issues
   - [ ] Multi-screen responsiveness for tablet and wide screen use
   - [ ] Fix issue where nurse can assign patient to already occupied room
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
         
 ## Contributing
 
@@ -188,6 +198,8 @@ If you have a suggestion that would make this better, please fork the repo and c
 4. Push to the Branch (git push origin feature/YourFeature)
 5. Open a Pull Request
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Contact
 
 Professor Christopher Riesbeck: c-riesbeck@northwestern.edu <br/>
@@ -200,12 +212,15 @@ MPD Team Roster:
 
 - Emily Zarefsky - Dani Salonen - Sarah Bennett
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Acknowledgements
 
 Christopher K Riesbeck
 
 W24 CS 394 Team Red
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/

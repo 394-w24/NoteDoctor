@@ -98,3 +98,27 @@ node version >= 16
 
 ## Additional Notes
 - **Running Tests:** To run tests, use `npm test`.
+
+## Roadmap
+
+### Project Structure
+
+### Contributing
+
+#### License
+MT License Copyright (c) 2022 Christopher
+
+#### Contact
+
+Professor Christopher Riesbeck: c-riesbeck@northwestern.edu <br/>
+CS394 Team Roster:
+
+- Benyella,Perry
+- Gonzalez,Aldiery Rene
+- Li,Zhuoyuan
+- Reichert,Rodney David
+- Shu,Dong
+- Xie,Quanyue
+- Yuan,Haoyang
+
+  MPD Team Roster:

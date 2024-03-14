@@ -1,7 +1,4 @@
-<h3 align="center">NoteDoctor</h3>
-
-
-## Introduction
+## About The Project
 github repo name: 394-w24 / NoteDoctor
 
 The project is created by team Red in CS394 course taught by Professor Riesbeck in winter 2024, in collaboration with Northwestern Master of Product Design and Development Management MPD program.

@@ -120,5 +120,11 @@ CS394 Team Roster:
 - Shu,Dong
 - Xie,Quanyue
 - Yuan,Haoyang
+- Kelly,Mei
 
-  MPD Team Roster:
+MPD Team Roster:
+
+- Emily Zarefsky
+- Salonen, Dani
+- Bennett, Sarah
+

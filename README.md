@@ -1,4 +1,8 @@
-## Getting Started
+## NoteDoctor
+
+<p align="center">
+  <img src="https://github.com/394-w24/NoteDoctor/assets/85666623/f577c7d6-9239-478b-bf38-6dd5c187c43c" alt="Note Doctor Logo">
+</p>
 
 ## Introduction
 NoteDoctor is an innovative web application designed to revolutionize the healthcare experience by prioritizing patient privacy and streamlining the consultation process. Our application offers a secure platform for displaying patients' medical conditions and history through a user-friendly interface, ensuring sensitive information is protected while making medical consultations more convenient. Additionally, NoteDoctor enhances clinic operations by monitoring the availability of consultation rooms, thereby organizing the flow of patients and reducing wait times. Developed with cutting-edge technologies such as Vite and React for the frontend, and Firebase for the backend, NoteDoctor is committed to delivering a seamless, efficient, and secure healthcare service for both patients and healthcare providers.
@@ -76,9 +80,6 @@ NoteDoctor is an innovative web application designed to revolutionize the health
      firestore-import -a path/to/your/credentials.json -b path/to/your/data.json
      ```
      Replace `path/to/your/credentials.json` and `path/to/your/data.json` with the actual paths to your files.
-
-## Known Bugs
-- (Include any known issues or bugs here)
 
 ## Additional Notes
 - **Running Tests:** To run tests, use `npm test`.

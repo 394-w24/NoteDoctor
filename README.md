@@ -146,9 +146,9 @@ Note Doctor is engineered to enhance the user experience across various roles wi
 - [X] Week 4 (3/1-3/7)
   - [x] Go/no go decision with product team
 
-- [ ] Future Work
+- [ ] Future Work and known issues
   - [ ] Multi-screen responsiveness for tablet and wide screen use
-
+  - [ ] Fix issue where nurse can assign patient to already occupied room
 ## Contributing
 
 Contributions to NoteDoctor are greatly appreciated! 

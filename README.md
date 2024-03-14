@@ -5,8 +5,18 @@
 </p>
 
 ## Introduction
-NoteDoctor is an innovative web application designed to revolutionize the healthcare experience by prioritizing patient privacy and streamlining the consultation process. Our application offers a secure platform for displaying patients' medical conditions and history through a user-friendly interface, ensuring sensitive information is protected while making medical consultations more convenient. Additionally, NoteDoctor enhances clinic operations by monitoring the availability of consultation rooms, thereby organizing the flow of patients and reducing wait times. Developed with cutting-edge technologies such as Vite and React for the frontend, and Firebase for the backend, NoteDoctor is committed to delivering a seamless, efficient, and secure healthcare service for both patients and healthcare providers.
+github repo name: 394-w24 / NoteDoctor
 
+The project is created by team Red in CS394 course taught by Professor Riesbeck in winter 2024, in collaboration with Northwestern Master of Product Design and Development Management MPD program.
+
+The project "NoteDoctor" is an innovative web application designed to revolutionize the healthcare experience by prioritizing patient privacy and streamlining the consultation process. Our application offers a secure platform for displaying patients' medical conditions and history through a user-friendly interface, ensuring sensitive information is protected while making medical consultations more convenient. Additionally, NoteDoctor enhances clinic operations by monitoring the availability of consultation rooms, thereby organizing the flow of patients and reducing wait times. Developed with cutting-edge technologies such as Vite and React for the frontend, and Firebase for the backend, NoteDoctor is committed to delivering a seamless, efficient, and secure healthcare service for both patients and healthcare providers.
+
+## Features:
+
+- Dynamic room assignment system
+- Patient privacy verification
+- Customized welcome page for patients
+- Symptom add-on functionality
 
 ### Installation and Running the App
 1. **Clone the repository:**

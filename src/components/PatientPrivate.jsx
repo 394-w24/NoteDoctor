@@ -29,7 +29,7 @@ const PatientPrivate = ({ room }) => {
   };
 
   return (
-    <div className="mt-10 flex flex-col">
+    <div data-testid="patient-private" className="mt-10 flex flex-col">
       <div className="flex items-center justify-center gap-8">
         <h1 className="font-cursive text-7xl">
           Hello, {patient.firstName} {patient.lastName}

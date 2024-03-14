@@ -66,7 +66,7 @@ const roomRenderer = (roomId) => {
 };
 
 describe('RoomScreen Component Tests', () => {
-  test('displays checked in patient', async () => {
+  test('checks that additional issues are present', async () => {
 
     // Mock useRealtimeRoom to return undefined to simulate loading state
     firebaseUtils.useRealtimeRoom.mockReturnValue(mockData);

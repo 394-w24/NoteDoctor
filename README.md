@@ -117,8 +117,6 @@ The Note Doctor app is designed with a clear and intuitive user interface, compr
 
 ## Roadmap
 
-## Contributing
-
 - [x] Week 1 (2/9-2/15)
   - [x] Meet the developers
   - [x] Overview of Concept
@@ -136,6 +134,19 @@ The Note Doctor app is designed with a clear and intuitive user interface, compr
     
 - [X] Week 4 (3/1-3/7)
   - [x] Go/no go decision with product team
+  - [ ] 
+
+## Contributing
+
+Contributions to NoteDoctor are greatly appreciated! 
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". 
+
+1. Fork the Project
+2. Create your Feature Branch (git checkout -b feature/YourFeature)
+3. Commit your Changes (git commit -m 'Add some YourFeature')
+4. Push to the Branch (git push origin feature/YourFeature)
+5. Open a Pull Request
 
 ## License
 MT License Copyright (c) 2022 Christopher

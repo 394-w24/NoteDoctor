@@ -18,6 +18,11 @@ The project "NoteDoctor" is an innovative web application designed to revolution
 - Customized welcome page for patients
 - Symptom add-on functionality
 
+## Prerequisites
+```
+node version >= 16
+```
+
 ### Installation and Running the App
 1. **Clone the repository:**
    ```bash

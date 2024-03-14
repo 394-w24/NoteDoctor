@@ -1,53 +1,84 @@
-# Note Doctor
+## Getting Started
 
-![](logo.png?raw=true)
+## Introduction
+NoteDoctor is an innovative web application designed to revolutionize the healthcare experience by prioritizing patient privacy and streamlining the consultation process. Our application offers a secure platform for displaying patients' medical conditions and history through a user-friendly interface, ensuring sensitive information is protected while making medical consultations more convenient. Additionally, NoteDoctor enhances clinic operations by monitoring the availability of consultation rooms, thereby organizing the flow of patients and reducing wait times. Developed with cutting-edge technologies such as Vite and React for the frontend, and Firebase for the backend, NoteDoctor is committed to delivering a seamless, efficient, and secure healthcare service for both patients and healthcare providers.
 
-This website is created using [Vite](https://vitejs.dev/) and [React](https://react.dev/)\
-The Backend was done using [Firebase](https://firebase.google.com/) using their Hosting, Firestore Database, and storage for large image files.
 
-## Available Scripts
+### Installation and Running the App
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/394-w24/NoteDoctor.git
+   cd note-doctor
+   ```
 
-In the project directory, you can run:
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-### `npm start`
+3. **Start the application:**
+   ```bash
+   npm start
+   ```
+   This command runs the app in development mode. Visit [http://localhost:5173](http://localhost:5173) in your browser. The app will automatically reload if you change any of the source files.
 
-Runs the app in the development mode.\
-Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+### Detailed Firebase Setup
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Create a Firebase Account and Project:**
+   - Visit [Firebase](https://firebase.google.com/) and sign up or log in.
+   - Click on "Go to console" at the top right corner.
+   - Click on "Add project" and follow the steps to create a new Firebase project.
 
-### `npm test`
+2. **Get Your Firebase Configuration:**
+   - In the Firebase console, select your project.
+   - Click on "Project settings" in the left menu.
+   - Find your Firebase project's configuration in the "General" tab under the "Your apps" section by adding a new web app if necessary.
+   - Click on the "</>" icon to register a new web app and follow the prompts.
+   - After the app is registered, you will see your Firebase configuration keys which look like this:
+     ```javascript
+     const firebaseConfig = {
+       apiKey: "YOUR_API_KEY",
+       authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+       projectId: "YOUR_PROJECT_ID",
+       storageBucket: "YOUR_PROJECT_ID.appspot.com",
+       messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+       appId: "YOUR_APP_ID",
+       measurementId: "YOUR_MEASUREMENT_ID"
+     };
+     ```
 
-Launches the test runner in the interactive watch mode.\
-This is run using [Vitest](https://vitest.dev/), which is similar to Jest.\
-See the section about [running tests](https://vitest.dev/guide/) for more information.
+3. **Configure Firebase in Your Application:**
+   - Create a file named `firebase.js` in your project's source directory (e.g., `/src`).
+   - Paste the Firebase configuration code snippet you obtained from the Firebase console into `firebase.js`.
+   - Make sure to replace the placeholder values in the configuration with your actual Firebase project details.
 
-### `npm run build`
+4. **Install Firebase SDK:**
+   - Run the following command in your project directory to install the Firebase package:
+     ```bash
+     npm install firebase
+     ```
+   - In `firebase.js`, initialize Firebase using the config object:
+     ```javascript
+     import { initializeApp } from 'firebase/app';
+     // Your firebaseConfig from step 2
+     const app = initializeApp(firebaseConfig);
+     ```
 
-Builds the app for production to the `build` folder.\
-This production build in the build folder can be deployed into most hosting providers.
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. **Import Starting Data into Firestore:**
+   - Ensure you have a `data.json` file with the data you want to import into Firestore.
+   - Install the `node-firestore-import-export` tool:
+     ```bash
+     npm install -g node-firestore-import-export
+     ```
+   - Generate a new private key for your Firebase service account in the Firebase console under "Project settings" > "Service accounts" and download it.
+   - Import your data into Firestore using the command line:
+     ```bash
+     firestore-import -a path/to/your/credentials.json -b path/to/your/data.json
+     ```
+     Replace `path/to/your/credentials.json` and `path/to/your/data.json` with the actual paths to your files.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Known Bugs
+- (Include any known issues or bugs here)
 
-See the section about [deployment](https://vitejs.dev/guide/static-deploy) for more information.
-
-### `npm run serve`
-
-This is similar to npm start, but is less efficient, as it will use a production build to display in the Localhost
-
-### `npm run coverage`
-
-This is similar to npm test, but does not activate a GUI and will instead display the code coverage in the terminal
-
-## Migrating to your own products
-
-We have provided a `data.json` which contains the data from the database that we were using. This data can be cleaned to work generally for other databases, although this one is formatted to work best for **Firestore** Database from Firebase.
-
-To use this data for free on firebase there are community npm packages to help.\
-`npm install -g node-firestore-import-export`\
-This will activate the command `firestore-import` globally on your system
-
-If you were to use Firebase, create a project, and under the **Project Settings** -> **Service Accounts**, generate a new private key and save the resulting json into `credentials.json` in your new repository. While in your terminal in your new repository you can run, `firestore-import -a credentials.json -b data.json ` to import the data into firestore
+## Additional Notes
+- **Running Tests:** To run tests, use `npm test`.

@@ -13,7 +13,7 @@ const RoomScreen = () => {
   if (!room.confirmed && room.appointment) return <PatientPrivate room={room} />;
   if (room.appointment) return <PatientWelcome room={room} />;
   return (
-    <div className="my-4 flex flex-col items-center gap-10">
+    <div data-testid="room" className="my-4 flex flex-col items-center gap-10">
       <h1 className="text-7xl font-bold">Room {room.name}</h1>
       {/* Insert QR Code Here */}
       <p>Code: {room.id}</p>

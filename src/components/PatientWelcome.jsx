@@ -127,7 +127,8 @@ const PatientWelcome = ({ room }) => {
   const age = differenceInYears(new Date(), dob);
 
   return (
-    <div className="flex min-h-svh justify-between gap-48 py-12 pl-24 pr-48">
+    <div className="flex min-h-svh justify-between gap-48 py-12 pl-24 pr-48"
+          data-testid="patient-welcome">
       <DateHeader />
       <div className="flex flex-col gap-10">
         <div className="flex items-center justify-center gap-8">
@@ -203,7 +204,7 @@ const PatientWelcome = ({ room }) => {
         </div>
         <div className="mt-8 w-1/2 grow">
           <div className="font-semibold">Additional Issues to Address</div>
-          <ul className="ml-6 list-disc space-y-1">
+          <ul data-testid = "additional-issues" className="ml-6 list-disc space-y-1">
             {additionalIssues.map((issue, index) => (
               <div key={index} className="flex items-center gap-2">
                 <li>{issue}</li>

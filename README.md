@@ -134,8 +134,10 @@ The Note Doctor app is designed with a clear and intuitive user interface, compr
     
 - [X] Week 4 (3/1-3/7)
   - [x] Go/no go decision with product team
-  - [ ] 
 
+- [X] Future Work
+  - [X] Multi-screen responsiveness for tablet and wide screen use
+-
 ## Contributing
 
 Contributions to NoteDoctor are greatly appreciated! 
@@ -158,11 +160,11 @@ CS394 Team Roster:
 
 - Benyella,Perry
 - Gonzalez,Aldiery Rene
-- Li,Zhuoyuan
+- Zhuoyuan,Li
 - Reichert,Rodney David
 - Shu,Dong
-- Xie,Quanyue
-- Haoyang, Yuan
+- Quanyue,Xie
+- Haoyang,Yuan
 - Kelly,Mei
 
 MPD Team Roster:

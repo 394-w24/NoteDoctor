@@ -1,9 +1,35 @@
-# Note Doctor
+# CS394 Red - Note Doctor
 
-![](logo.png?raw=true)
+![PROJECT_LOGO](note_doctor_logo.png)
+
+github repo name: 394-w24 / NoteDoctor
+The project is created by team Red in CS394 course taught by Professor Riesbeck in winter 2024, in collaboration with Northwestern Master of Product Design and Development Management MPD program. The webapp "NoteDoctor" aims to create a welcoming and warm environment for patients when they enter the exam room.
 
 This website is created using [Vite](https://vitejs.dev/) and [React](https://react.dev/)\
 The Backend was done using [Firebase](https://firebase.google.com/) using their Hosting, Firestore Database, and storage for large image files.
+
+## Features:
+
+- Dynamic room assignment system
+- Patient privacy verification
+- Customized welcome page for patients
+- Symptom add-on functionality
+
+# Getting Started
+
+## Prerequisites
+
+```
+    node version >= 16
+```
+
+## Installation
+
+```shell
+    git clone https://github.com/394-w24/NoteDoctor.git
+    cd NoteDoctor
+    npm install
+```
 
 ## Available Scripts
 

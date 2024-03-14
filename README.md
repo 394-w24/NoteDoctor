@@ -34,7 +34,7 @@ The project is created by team Red in CS394 course taught by Professor Riesbeck 
 ### Built With
 
 * [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
+* [![Vite][Vite.js]][Vite-url]
 * [![Firebase][Firebase.js]][Firebase-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 
@@ -226,8 +226,8 @@ W24 CS 394 Team Red
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
+[Vite.js]: https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E
+[Vite-url]: https://vitejs.dev/
 [Firebase.js]: https://img.shields.io/badge/Firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black
 [Firebase-url]: https://firebase.google.com/
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white

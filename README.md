@@ -96,12 +96,46 @@ node version >= 16
      ```
      Replace `path/to/your/credentials.json` and `path/to/your/data.json` with the actual paths to your files.
 
-## Additional Notes
-- **Running Tests:** To run tests, use `npm test`.
+## Usage
+
+The Note Doctor app is designed with a clear and intuitive user interface, comprising several screens, each catering to different roles and functionalities within the healthcare workflow.
+
+### Screen 1: Patient Display View
+
+- **Purpose**: This view is specifically designed for patients. It provides them with a comprehensive overview of their upcoming appointments, care team details, and treatment history.
+- **Privacy First**: Before accessing their medical information, patients are required to verify their identity by providing their birthdate. This step ensures that sensitive health information remains confidential and is only accessible to the appropriate individuals.
+
+### Screen 2: Nurse Check-In View
+
+- **Purpose**: Nurses utilize this screen to efficiently manage patient flow. They can assign patients to rooms, track the occupancy of rooms, and update patient statuses to optimize the allocation of hospital resources.
+- **Workflow Optimization**: By streamlining the process of patient room assignment, this view aids in reducing wait times and enhances the overall efficiency of the healthcare facility.
+
+### Screen 3: Backdoor View
+
+- **Demonstration Only**: The backdoor view is included to showcase the application's capabilities to stakeholders. It offers a behind-the-scenes look at the system's operation and is not intended for actual medical use.
+
 
 ## Roadmap
 
 ## Contributing
+
+- [x] Week 1 (2/9-2/15)
+  - [x] Meet the developers
+  - [x] Overview of Concept
+  - [x] Requirements Refinement
+  - [ ] Product team to create UI mock to enable engineering team for build phase
+
+
+- [x] Week 2 (2/16-2/22)
+  - [x] Product team to create UI mock to enable engineering team for build phase
+  - [ ] Engineering team to create MVP version of app- (2x) meeting with product team
+
+
+- [X] Week 3 (2/23-2/29)
+  - [x] Engineering team to create MVP version of app- (2x) meeting with product team
+    
+- [X] Week 4 (3/1-3/7)
+  - [x] Go/no go decision with product team
 
 ## License
 MT License Copyright (c) 2022 Christopher

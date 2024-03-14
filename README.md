@@ -128,3 +128,6 @@ MPD Team Roster:
 - Salonen, Dani
 - Bennett, Sarah
 
+#### Acknowledgements
+
+W24 CS 394 Team Red

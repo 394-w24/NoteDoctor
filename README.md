@@ -101,12 +101,12 @@ node version >= 16
 
 ## Roadmap
 
-### Contributing
+## Contributing
 
-#### License
+## License
 MT License Copyright (c) 2022 Christopher
 
-#### Contact
+## Contact
 
 Professor Christopher Riesbeck: c-riesbeck@northwestern.edu <br/>
 CS394 Team Roster:
@@ -126,6 +126,8 @@ MPD Team Roster:
 - Salonen, Dani
 - Bennett, Sarah
 
-#### Acknowledgements
+## Acknowledgements
+
+Christopher K Riesbeck
 
 W24 CS 394 Team Red

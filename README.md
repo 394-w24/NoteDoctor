@@ -11,6 +11,8 @@ The project is created by team Red in CS394 course taught by Professor Riesbeck 
 - **Modern Technology**: Developed with cutting-edge technologies, including Vite and React for the frontend, and Firebase for the backend.
 - **Commitment to Healthcare**: Committed to delivering a seamless, efficient, and secure healthcare service for both patients and healthcare providers.
 
+<a name="readme-top"></a>
+
 <details open>
 <summary>Table of Contents</summary>
 <ul>

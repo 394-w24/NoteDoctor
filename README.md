@@ -48,7 +48,7 @@ node version >= 16
    ```bash
    npm start
    ```
-   This command runs the app in development mode. Visit [http://localhost:5173](http://localhost:5173) in your browser. The app will automatically reload if you change any of the source files.
+   Please make sure you set up Firebase and then start to run. This command runs the app in development mode. Visit [http://localhost:5173](http://localhost:5173) in your browser. The app will automatically reload if you change any of the source files.
 
 ### Detailed Firebase Setup
 

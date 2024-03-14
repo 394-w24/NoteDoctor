@@ -1,4 +1,5 @@
-## NoteDoctor
+<h3 align="center">NoteDoctor</h3>
+
 
 ## Introduction
 github repo name: 394-w24 / NoteDoctor
@@ -7,6 +8,14 @@ The project is created by team Red in CS394 course taught by Professor Riesbeck 
 
 The project "NoteDoctor" is an innovative web application designed to revolutionize the healthcare experience by prioritizing patient privacy and streamlining the consultation process. Our application offers a secure platform for displaying patients' medical conditions and history through a user-friendly interface, ensuring sensitive information is protected while making medical consultations more convenient. Additionally, NoteDoctor enhances clinic operations by monitoring the availability of consultation rooms, thereby organizing the flow of patients and reducing wait times. Developed with cutting-edge technologies such as Vite and React for the frontend, and Firebase for the backend, NoteDoctor is committed to delivering a seamless, efficient, and secure healthcare service for both patients and healthcare providers.
 
+### Built With
+
+* [![React][React.js]][React-url]
+* [![Vue][Vue.js]][Vue-url]
+* [![Firebase][Firebase.js]][Firebase-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+
+  
 ## Features:
 
 - Dynamic room assignment system
@@ -175,3 +184,13 @@ MPD Team Roster:
 Christopher K Riesbeck
 
 W24 CS 394 Team Red
+
+
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[Vue-url]: https://vuejs.org/
+[Firebase.js]: https://img.shields.io/badge/Firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black
+[Firebase-url]: https://firebase.google.com/
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com

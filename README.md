@@ -101,8 +101,6 @@ node version >= 16
 
 ## Roadmap
 
-### Project Structure
-
 ### Contributing
 
 #### License
@@ -119,7 +117,7 @@ CS394 Team Roster:
 - Reichert,Rodney David
 - Shu,Dong
 - Xie,Quanyue
-- Yuan,Haoyang
+- Haoyang, Yuan
 - Kelly,Mei
 
 MPD Team Roster:

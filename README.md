@@ -161,8 +161,9 @@ If you have a suggestion that would make this better, please fork the repo and c
 ## Contact
 
 Professor Christopher Riesbeck: c-riesbeck@northwestern.edu <br/>
+Developer Contact: Aldierygonzalez2024@u.northwestern.edu
+
 CS394 Team Roster:
-- Aldi Gonzalez: Aldierygonzalez2024@u.northwestern.edu
 - Perry Benyella - Aldiery Rene Gonzalez - Zhuoyuan Li - Rodney David Reichert - Dong Shu - Quanyue Xie - Haoyang Yuan - Kelly Mei
 
 MPD Team Roster:

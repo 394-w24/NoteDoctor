@@ -1,5 +1,7 @@
 # Note Doctor
 
+![](logo.png?raw=true)
+
 This website is created using [Vite](https://vitejs.dev/) and [React](https://react.dev/)\
 The Backend was done using [Firebase](https://firebase.google.com/) using their Hosting, Firestore Database, and storage for large image files.
 

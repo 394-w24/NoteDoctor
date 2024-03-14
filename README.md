@@ -152,9 +152,14 @@ Note Doctor is engineered to enhance the user experience across various roles wi
 
 ### Screen 3: Room Overview
 ![3](https://github.com/394-w24/NoteDoctor/assets/85666623/123d24ee-96a3-42b7-848a-f50415a680d5)
-![4](https://github.com/394-w24/NoteDoctor/assets/85666623/2ed8718e-412a-43cf-9503-543dfad8a947)
+
 
 - **Objective**: This screen offers a real-time overview of room statuses, providing valuable information on room availability, which assists in resource management and allocation.
+
+### Screen 4: Backdoor View
+![4](https://github.com/394-w24/NoteDoctor/assets/85666623/2ed8718e-412a-43cf-9503-543dfad8a947)
+
+- **Objective**: This screen is added for demonstration purposes.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
